@@ -1,0 +1,8 @@
+.CharactersPage__logo {
+  display: flex;
+  justify-content: center;
+}
+
+.CharactersPage__logo:hover {
+  cursor: pointer;
+}
