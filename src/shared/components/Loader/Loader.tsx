@@ -1,5 +1,5 @@
-import './Loader.css';
 import { LoaderIcon } from '@/shared/assets';
+import './Loader.css';
 
 type LoaderProps = {
   size?: 'xl' | 'sm';

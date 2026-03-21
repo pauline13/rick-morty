@@ -1,8 +1,8 @@
-import './Header.css';
 import { useNavigate } from 'react-router';
 
 import { LogoIcon, SunIcon } from '@/shared/assets';
 import { Button } from '@/shared/components';
+import './Header.css';
 
 export const Header = () => {
   const navigate = useNavigate();

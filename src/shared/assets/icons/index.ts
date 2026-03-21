@@ -1,4 +1,5 @@
 import ArrowBackIcon from './arrow-back.svg?react';
+import ArrowDownIcon from './arrow-down.svg?react';
 import LoaderIcon from './loader.svg?react';
 import LogoXlIcon from './logo-xl.svg?react';
 import LogoIcon from './logo.svg?react';
@@ -11,5 +12,6 @@ export {
   LoaderIcon,
   LogoXlIcon,
   NotFoundIcon,
-  ArrowBackIcon
+  ArrowBackIcon,
+  ArrowDownIcon
 };
