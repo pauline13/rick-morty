@@ -1,0 +1,92 @@
+.Select__wrapper {
+  position: relative;
+}
+
+.Select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  border: 1px solid #393939;
+  padding: 8px;
+  border-radius: 6px;
+  color: #636363;
+}
+
+.Select_xl {
+  font-size: 16px;
+  height: 55.5px;
+  padding: 18px 14px;
+}
+
+.Select_sm {
+  font-size: 14px;
+  height: 21px;
+  padding: 2px 5px;
+}
+
+.Select__value {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.Select__icon {
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.Select__icon_xl {
+  width: 24px;
+  height: 24px;
+}
+
+.Select__icon_sm {
+  width: 9px;
+  height: 9px;
+}
+
+.Select__icon_open {
+  transform: rotate(180deg);
+}
+
+.Select__dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  border: 1px solid #393939;
+  border-radius: 6px;
+  padding: 1px;
+  background: #fff;
+  color: #636363;
+  z-index: 10;
+}
+
+.Select__dropdown_xl {
+  font-size: 16px;
+}
+
+.Select__dropdown_sm {
+  font-size: 14px;
+}
+
+.Select__option {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.Select__option_xl {
+  padding: 14px 10px;
+}
+
+.Select__option_sm {
+  padding: 5px;
+}
+
+.Select__option:hover {
+  background: #f5f5f5;
+}

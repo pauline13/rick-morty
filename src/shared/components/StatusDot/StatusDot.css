@@ -1,0 +1,17 @@
+.StatusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.StatusDot_green {
+  background-color: #12b800;
+}
+
+.StatusDot_red {
+  background-color: #df0000;
+}
+
+.StatusDot_orange {
+  background-color: #ff9900;
+}
