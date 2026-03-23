@@ -1,21 +1,22 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 import { ArrowDownIcon } from '@/shared/assets';
+import { classNames } from '@/shared/helpers';
 import './Select.css';
 
-export type Option = {
+export interface Option {
   label: string;
   value: string;
-};
+}
 
-type SelectProps = {
+interface SelectProps {
   options: Option[];
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
   size?: 'xl' | 'sm';
   renderSuffix?: (option: Option) => ReactNode;
-};
+}
 
 export const Select = ({
   options,
@@ -50,7 +51,10 @@ export const Select = ({
 
   return (
     <div className='Select__wrapper' ref={rootRef}>
-      <div className={`Select Select_${size}`} onClick={handleToggle}>
+      <div
+        className={classNames('Select', `Select_${size}`)}
+        onClick={handleToggle}
+      >
         <div className='Select__value'>
           {selectedOption ? (
             <>
@@ -63,18 +67,24 @@ export const Select = ({
         </div>
 
         <div
-          className={`Select__icon Select__icon_${size} ${isOpen && 'Select__icon_open'}`}
+          className={classNames(
+            'Select__icon',
+            `Select__icon_${size}`,
+            isOpen && 'Select__icon_open'
+          )}
         >
           <ArrowDownIcon />
         </div>
       </div>
 
       {isOpen && (
-        <div className={`Select__dropdown Select__dropdown_${size}`}>
+        <div
+          className={classNames('Select__dropdown', `Select__dropdown_${size}`)}
+        >
           {options.map((option) => (
             <div
               key={option.value}
-              className={`Select__option Select__option_${size}`}
+              className={classNames('Select__option', `Select__option_${size}`)}
               onClick={() => handleSelect(option.value)}
             >
               <span className='Select__optionLabel'>{option.label}</span>
