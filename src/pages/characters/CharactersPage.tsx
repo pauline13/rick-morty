@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { LogoXlIcon } from '@/shared/assets';
+import { LogoXlIcon, SearchIcon } from '@/shared/assets';
 import {
+  Input,
   Select,
   StatusDot,
   type Option,
@@ -23,7 +24,8 @@ const statusMap: Record<string, Status> = {
 export const CharactersPage = () => {
   const navigate = useNavigate();
 
-  const [value, setValue] = useState('');
+  const [selectValue, setSelectValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
 
   const renderStatus = (option: Option) => {
     const status = statusMap[option.value];
@@ -43,20 +45,29 @@ export const CharactersPage = () => {
       <br />
       <Select
         options={options}
-        value={value}
-        onChange={setValue}
+        value={selectValue}
+        onChange={setSelectValue}
         placeholder='Select option'
         size='xl'
       />
       <br />
       <Select
         options={options}
-        value={value}
-        onChange={setValue}
+        value={selectValue}
+        onChange={setSelectValue}
         placeholder='Select option'
         size='sm'
         renderSuffix={renderStatus}
       />
+      <br />
+      <Input
+        value={inputValue}
+        rightIcon={<SearchIcon />}
+        variant='outline'
+        onChange={setInputValue}
+      />
+      <br />
+      <Input value={inputValue} variant='underline' onChange={setInputValue} />
     </div>
   );
 };

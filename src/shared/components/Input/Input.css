@@ -1,0 +1,35 @@
+.Input {
+  display: flex;
+  align-items: center;
+}
+
+.Input_outline {
+  padding: 16px;
+  border: 1px solid #393939;
+  border-radius: 6px;
+}
+
+.Input_underline {
+  height: 30px;
+  border-bottom: 1px solid #000;
+}
+
+.Input__field {
+  all: unset;
+  width: 100%;
+  font-size: 16px;
+}
+
+.Input__field_outline {
+  margin: 0 5px 0 8px;
+}
+
+.Input__field_underline {
+  font-weight: 500;
+}
+
+.Input__clearButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
