@@ -1,35 +1,42 @@
 .Input {
   display: flex;
   align-items: center;
+  max-height: 56px;
+}
+
+.Input_readonly .Input__field {
+  height: 30px;
 }
 
 .Input_outline {
   padding: 16px;
-  border: 1px solid #393939;
-  border-radius: 6px;
+  border: 1px solid var(--border-grey);
+  border-radius: var(--border-radius);
 }
 
 .Input_underline {
   height: 30px;
-  border-bottom: 1px solid #000;
+  transition: border-color 0.2s;
+  border-bottom: 1px solid var(--border-black);
 }
 
 .Input__field {
   all: unset;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   width: 100%;
-  font-size: 16px;
+  color: var(--text-secondary);
 }
 
 .Input__field_outline {
   margin: 0 5px 0 8px;
 }
 
-.Input__field_underline {
-  font-weight: 500;
+.Input__field_xl {
+  font-size: 16px;
 }
 
-.Input__clearButton {
-  background: none;
-  border: none;
-  cursor: pointer;
+.Input__field_sm {
+  font-size: 14px;
 }

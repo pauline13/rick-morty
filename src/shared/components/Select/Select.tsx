@@ -12,6 +12,7 @@ export interface Option {
 interface SelectProps {
   options: Option[];
   value: string;
+  readOnly?: boolean;
   onChange: (value: string) => void;
   placeholder?: string;
   size?: 'xl' | 'sm';
@@ -21,6 +22,7 @@ interface SelectProps {
 export const Select = ({
   options,
   value,
+  readOnly = false,
   onChange,
   placeholder = 'Select an option',
   size = 'xl',
@@ -42,18 +44,29 @@ export const Select = ({
 
   const selectedOption = options.find((option) => option.value === value);
 
-  const handleToggle = () => setIsOpen((prev) => !prev);
+  const handleToggle = () => {
+    if (readOnly) return;
+    setIsOpen((prev) => !prev);
+  };
 
   const handleSelect = (selectedValue: string) => {
+    if (readOnly) return;
     onChange(selectedValue);
     setIsOpen(false);
   };
 
+  const isDropdownOpen = isOpen && !readOnly;
+
   return (
     <div className='Select__wrapper' ref={rootRef}>
       <div
-        className={classNames('Select', `Select_${size}`)}
-        onClick={handleToggle}
+        className={classNames(
+          'Select',
+          `Select_${size}`,
+          !readOnly && 'Select_interactive',
+          readOnly && 'Select_readonly'
+        )}
+        onClick={!readOnly ? handleToggle : undefined}
       >
         <div className='Select__value'>
           {selectedOption ? (
@@ -70,14 +83,14 @@ export const Select = ({
           className={classNames(
             'Select__icon',
             `Select__icon_${size}`,
-            isOpen && 'Select__icon_open'
+            isDropdownOpen && 'Select__icon_open'
           )}
         >
           <ArrowDownIcon />
         </div>
       </div>
 
-      {isOpen && (
+      {isDropdownOpen && (
         <div
           className={classNames('Select__dropdown', `Select__dropdown_${size}`)}
         >

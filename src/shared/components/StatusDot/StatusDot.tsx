@@ -1,13 +1,12 @@
 import { classNames } from '@/shared/helpers';
 import './StatusDot.css';
+import type { Status } from '@/shared/types';
 
-const STATUS_COLOR = {
+const STATUS_COLOR: Record<Status, string> = {
   alive: 'green',
   dead: 'red',
   unknown: 'orange'
 };
-
-export type Status = keyof typeof STATUS_COLOR;
 
 interface StatusDotProps {
   status: Status;

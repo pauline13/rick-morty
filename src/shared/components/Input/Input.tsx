@@ -1,6 +1,7 @@
 import type { ChangeEvent, ReactNode } from 'react';
 
 import { CloseIcon } from '@/shared/assets';
+import { ButtonIcon } from '@/shared/components';
 import { classNames } from '@/shared/helpers';
 
 import './Input.css';
@@ -13,6 +14,8 @@ interface InputProps {
   onChange: (value: string) => void;
   size?: 'xl' | 'sm';
   variant?: 'underline' | 'outline';
+  readOnly?: boolean;
+  className?: string;
 }
 
 export const Input = ({
@@ -22,9 +25,11 @@ export const Input = ({
   showClear = true,
   onChange,
   size = 'xl',
-  variant = 'outline'
+  variant = 'outline',
+  readOnly = false,
+  className
 }: InputProps) => {
-  const handleChangeVaule = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };
   const handleClear = () => {
@@ -32,22 +37,31 @@ export const Input = ({
   };
 
   return (
-    <div className={classNames('Input', `Input_${size}`, `Input_${variant}`)}>
+    <div
+      className={classNames(
+        'Input',
+        `Input_${size}`,
+        !readOnly && `Input_${variant}`,
+        readOnly && 'Input_readonly'
+      )}
+    >
       {rightIcon && <div>{rightIcon}</div>}
       <input
-        className={classNames('Input__field', `Input__field_${variant}`)}
+        className={classNames(
+          'Input__field',
+          `Input__field_${size}`,
+          `Input__field_${variant}`,
+          className
+        )}
         placeholder={placeholder}
         value={value}
-        onChange={handleChangeVaule}
+        readOnly={readOnly}
+        onChange={handleChangeValue}
       />
-      {value !== '' && showClear && (
-        <button
-          className='Input__clearButton'
-          type='button'
-          onClick={handleClear}
-        >
+      {!readOnly && value !== '' && showClear && (
+        <ButtonIcon type='button' size='sm' onClick={handleClear}>
           <CloseIcon />
-        </button>
+        </ButtonIcon>
       )}
     </div>
   );

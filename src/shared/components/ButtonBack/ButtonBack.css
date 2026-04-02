@@ -1,20 +1,19 @@
 .ButtonBack {
-  border: none;
-  outline: none;
-  background: none;
-  cursor: pointer;
-
   display: flex;
   align-items: center;
   gap: 8px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 .ButtonBack:hover {
-  opacity: 0.7;
+  background-color: var(--background-default-hover);
 }
 
 .ButtonBack__text {
-  font: 'Karla';
-  font-size: 18px;
+  font-family: var(--font-secondary);
+  font-size: var(--fons-size-xl);
   font-weight: 700;
 }

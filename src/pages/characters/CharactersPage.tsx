@@ -1,73 +1,39 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
 
-import { LogoXlIcon, SearchIcon } from '@/shared/assets';
-import {
-  Input,
-  Select,
-  StatusDot,
-  type Option,
-  type Status
-} from '@/shared/components';
+import { LogoXlIcon } from '@/shared/assets';
+import type { Character, Status } from '@/shared/types';
+import { CharacterCard } from '@/widgets';
+
 import './CharactersPage.css';
 
-const options: Option[] = [
-  { label: 'One', value: '1' },
-  { label: 'Two', value: '2' }
-];
-
-const statusMap: Record<string, Status> = {
-  '1': 'alive',
-  '2': 'dead'
-};
-
 export const CharactersPage = () => {
-  const navigate = useNavigate();
+  const [characters, setCharacters] = useState([
+    {
+      id: 1,
+      name: 'Rick Sanchez',
+      location: 'Earth',
+      status: 'alive' as Status
+    }
+  ]);
 
-  const [selectValue, setSelectValue] = useState('');
-  const [inputValue, setInputValue] = useState('');
-
-  const renderStatus = (option: Option) => {
-    const status = statusMap[option.value];
-    if (!status) return null;
-
-    return <StatusDot status={status} />;
+  const handleCharacterChange = (updated: Character) => {
+    setCharacters((prev) =>
+      prev.map((c) => (c.id === updated.id ? updated : c))
+    );
   };
 
   return (
     <div className='CharactersPage'>
-      <div
-        className='CharactersPage__logo'
-        onClick={() => navigate('/character-info')}
-      >
+      <div className='CharactersPage__logo'>
         <LogoXlIcon />
       </div>
-      <br />
-      <Select
-        options={options}
-        value={selectValue}
-        onChange={setSelectValue}
-        placeholder='Select option'
-        size='xl'
-      />
-      <br />
-      <Select
-        options={options}
-        value={selectValue}
-        onChange={setSelectValue}
-        placeholder='Select option'
-        size='sm'
-        renderSuffix={renderStatus}
-      />
-      <br />
-      <Input
-        value={inputValue}
-        rightIcon={<SearchIcon />}
-        variant='outline'
-        onChange={setInputValue}
-      />
-      <br />
-      <Input value={inputValue} variant='underline' onChange={setInputValue} />
+      {characters.map((char) => (
+        <CharacterCard
+          key={char.id}
+          character={char}
+          onChange={handleCharacterChange}
+        />
+      ))}
     </div>
   );
 };
