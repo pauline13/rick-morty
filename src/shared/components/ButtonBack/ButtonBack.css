@@ -14,6 +14,6 @@
 
 .ButtonBack__text {
   font-family: var(--font-secondary);
-  font-size: var(--fons-size-xl);
+  font-size: var(--font-size-xl);
   font-weight: 700;
 }

@@ -4,22 +4,22 @@ import { ArrowDownIcon } from '@/shared/assets';
 import { classNames } from '@/shared/helpers';
 import './Select.css';
 
-export interface Option {
+export interface Option<T extends string = string> {
   label: string;
-  value: string;
+  value: T;
 }
 
-interface SelectProps {
-  options: Option[];
-  value: string;
+interface SelectProps<T extends string = string> {
+  options: Option<T>[];
+  value: T;
+  onChange: (value: T) => void;
   readOnly?: boolean;
-  onChange: (value: string) => void;
   placeholder?: string;
   size?: 'xl' | 'sm';
-  renderSuffix?: (option: Option) => ReactNode;
+  renderSuffix?: (option: Option<T>) => ReactNode;
 }
 
-export const Select = ({
+export const Select = <T extends string>({
   options,
   value,
   readOnly = false,
@@ -27,7 +27,7 @@ export const Select = ({
   placeholder = 'Select an option',
   size = 'xl',
   renderSuffix
-}: SelectProps) => {
+}: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -49,7 +49,7 @@ export const Select = ({
     setIsOpen((prev) => !prev);
   };
 
-  const handleSelect = (selectedValue: string) => {
+  const handleSelect = (selectedValue: T) => {
     if (readOnly) return;
     onChange(selectedValue);
     setIsOpen(false);

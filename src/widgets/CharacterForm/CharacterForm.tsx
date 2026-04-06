@@ -1,7 +1,8 @@
 import { Link } from 'react-router';
 
 import { Input, Select, StatusDot } from '@/shared/components';
-import type { Character, Status } from '@/shared/types';
+import { STATUS_OPTIONS } from '@/shared/constants';
+import type { Character } from '@/shared/types';
 
 import './CharacterForm.css';
 
@@ -55,21 +56,13 @@ export const CharacterForm = ({
       <div className='CharacterForm__field'>
         <p className='CharacterForm__label'>Status</p>
         <Select
-          options={[
-            { label: 'Alive', value: 'alive' },
-            { label: 'Dead', value: 'dead' },
-            { label: 'Unknown', value: 'unknown' }
-          ]}
+          options={STATUS_OPTIONS}
           value={value.status}
           readOnly={!isEditing}
           size='sm'
           placeholder='Status'
-          onChange={(status) =>
-            onChange({ ...value, status: status as Status })
-          }
-          renderSuffix={(option) => (
-            <StatusDot status={option.value as Status} />
-          )}
+          onChange={(status) => onChange({ ...value, status })}
+          renderSuffix={(option) => <StatusDot status={option.value} />}
         />
       </div>
     </div>
