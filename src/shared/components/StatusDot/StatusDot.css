@@ -5,13 +5,13 @@
 }
 
 .StatusDot_green {
-  background-color: #12b800;
+  background-color: var(--status-green);
 }
 
 .StatusDot_red {
-  background-color: #df0000;
+  background-color: var(--status-red);
 }
 
 .StatusDot_orange {
-  background-color: #ff9900;
+  background-color: var(--status-orange);
 }

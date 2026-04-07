@@ -4,28 +4,30 @@ import { ArrowDownIcon } from '@/shared/assets';
 import { classNames } from '@/shared/helpers';
 import './Select.css';
 
-export interface Option {
+export interface Option<T extends string = string> {
   label: string;
-  value: string;
+  value: T;
 }
 
-interface SelectProps {
-  options: Option[];
-  value: string;
-  onChange: (value: string) => void;
+interface SelectProps<T extends string = string> {
+  options: Option<T>[];
+  value: T;
+  onChange: (value: T) => void;
+  readOnly?: boolean;
   placeholder?: string;
   size?: 'xl' | 'sm';
-  renderSuffix?: (option: Option) => ReactNode;
+  renderSuffix?: (option: Option<T>) => ReactNode;
 }
 
-export const Select = ({
+export const Select = <T extends string>({
   options,
   value,
+  readOnly = false,
   onChange,
   placeholder = 'Select an option',
   size = 'xl',
   renderSuffix
-}: SelectProps) => {
+}: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -42,18 +44,29 @@ export const Select = ({
 
   const selectedOption = options.find((option) => option.value === value);
 
-  const handleToggle = () => setIsOpen((prev) => !prev);
+  const handleToggle = () => {
+    if (readOnly) return;
+    setIsOpen((prev) => !prev);
+  };
 
-  const handleSelect = (selectedValue: string) => {
+  const handleSelect = (selectedValue: T) => {
+    if (readOnly) return;
     onChange(selectedValue);
     setIsOpen(false);
   };
 
+  const isDropdownOpen = isOpen && !readOnly;
+
   return (
     <div className='Select__wrapper' ref={rootRef}>
       <div
-        className={classNames('Select', `Select_${size}`)}
-        onClick={handleToggle}
+        className={classNames(
+          'Select',
+          `Select_${size}`,
+          !readOnly && 'Select_interactive',
+          readOnly && 'Select_readonly'
+        )}
+        onClick={!readOnly ? handleToggle : undefined}
       >
         <div className='Select__value'>
           {selectedOption ? (
@@ -70,14 +83,14 @@ export const Select = ({
           className={classNames(
             'Select__icon',
             `Select__icon_${size}`,
-            isOpen && 'Select__icon_open'
+            isDropdownOpen && 'Select__icon_open'
           )}
         >
           <ArrowDownIcon />
         </div>
       </div>
 
-      {isOpen && (
+      {isDropdownOpen && (
         <div
           className={classNames('Select__dropdown', `Select__dropdown_${size}`)}
         >

@@ -23,15 +23,17 @@
   0% {
     scale: 1;
   }
+
   50% {
     scale: 1.04;
   }
+
   100% {
     scale: 1;
   }
 }
 
 .Loader__text {
-  font-family: 'Karla';
-  font-size: 18px;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-xl);
 }

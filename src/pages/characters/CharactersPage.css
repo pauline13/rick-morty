@@ -1,8 +1,10 @@
+.CharactersPage {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .CharactersPage__logo {
   display: flex;
   justify-content: center;
-}
-
-.CharactersPage__logo:hover {
-  cursor: pointer;
 }

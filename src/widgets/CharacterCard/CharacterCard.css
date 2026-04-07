@@ -1,0 +1,41 @@
+.CharacterCard {
+  position: relative;
+  display: flex;
+  gap: 13px;
+  width: 508px;
+  height: 248px;
+  padding: 7px;
+  border-radius: var(--border-radius);
+  background-color: var(--background-default);
+  box-shadow: 0 1px 4px 1px var(--shadow-medium);
+}
+
+.CharacterCard__image {
+  width: 240px;
+  height: 234px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--border-radius);
+  flex-shrink: 0;
+}
+
+.CharacterCard__content {
+  max-width: 178px;
+}
+
+.CharacterCard__actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  transition: opacity 0.2s;
+  opacity: 0;
+}
+
+.CharacterCard:hover .CharacterCard__actions {
+  opacity: 1;
+}
+
+.CharacterCard_editing .CharacterCard__actions {
+  opacity: 1;
+}

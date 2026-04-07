@@ -1,26 +1,26 @@
 .Button {
-  width: 38px;
-  height: 38px;
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 38px;
+  height: 38px;
   padding: 0 8px;
+  font-size: var(--font-size-m);
+  border: 1px solid var(--border-black);
+  border-radius: var(--border-radius-m);
+  background-color: var(--background-default);
   cursor: pointer;
   font-family: inherit;
-  font-size: 14px;
 }
 
 .Button:hover {
   opacity: 0.8;
-  background-color: #ececec;
+  background-color: var(--background-default-hover);
 }
 
 .Button:active {
   opacity: 0.7;
-  background-color: white;
+  background-color: var(--background-default);
 }
 
 .Button__icon {
@@ -29,5 +29,5 @@
 
 .Button__text {
   font-size: 25px;
-  color: #636363;
+  color: var(--text-secondary);
 }

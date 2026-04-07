@@ -1,0 +1,44 @@
+.CharacterForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.CharacterForm__nameWrapper {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  font-weight: 500;
+  max-width: 178px;
+}
+
+.CharacterForm__inputName {
+  font-size: var(--font-size-xxl);
+  color: var(--text-primary);
+}
+
+.CharacterForm__linkName {
+  height: 23px;
+  font-size: var(--font-size-xxl);
+  color: var(--text-primary);
+  text-decoration: none;
+  max-width: 178px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.CharacterForm__linkName:hover {
+  color: var(--text-secondary);
+}
+
+.CharacterForm__label {
+  font-weight: 500;
+  color: var(--text-grey);
+}
+
+.CharacterForm__value {
+  margin-top: 7px;
+  font-size: var(--font-size-m);
+  color: var(--text-secondary);
+}
