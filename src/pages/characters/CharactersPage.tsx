@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { LogoXlIcon } from '@/shared/assets';
 import type { Character, Status } from '@/shared/types';
-import { CharacterCard } from '@/widgets';
+import { CharacterCard, FiltersPanel } from '@/widgets';
 
 import './CharactersPage.css';
 
@@ -26,6 +26,9 @@ export const CharactersPage = () => {
     <div className='CharactersPage'>
       <div className='CharactersPage__logo'>
         <LogoXlIcon />
+      </div>
+      <div className='CharactersPage__filters'>
+        <FiltersPanel />
       </div>
       {characters.map((char) => (
         <CharacterCard
