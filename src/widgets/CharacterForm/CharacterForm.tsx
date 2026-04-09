@@ -22,7 +22,7 @@ export const CharacterForm = ({
       <div className='CharacterForm__nameWrapper'>
         {isEditing ? (
           <Input
-            className='CharacterForm__inputName'
+            classNameInput='CharacterForm__inputName'
             placeholder={value.name}
             value={value.name}
             variant='underline'

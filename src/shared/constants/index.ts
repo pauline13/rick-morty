@@ -1,1 +1,1 @@
-export * from './statusOptions';
+export * from './options';

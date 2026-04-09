@@ -1,4 +1,4 @@
-export type Status = 'alive' | 'dead' | 'unknown';
+import type { Status } from '@/shared/types';
 
 export interface Character {
   id: number;

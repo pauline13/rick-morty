@@ -1,0 +1,10 @@
+.FiltersPanel {
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.FiltersPanel__field {
+  width: 100%;
+  max-width: 238px;
+}

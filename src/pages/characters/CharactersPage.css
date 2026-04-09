@@ -1,10 +1,13 @@
 .CharactersPage {
   display: flex;
   flex-direction: column;
-  gap: 24px;
 }
 
 .CharactersPage__logo {
   display: flex;
   justify-content: center;
+}
+
+.CharactersPage__filters {
+  margin: 16px 0 26px;
 }

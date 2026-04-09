@@ -17,6 +17,7 @@ interface SelectProps<T extends string = string> {
   placeholder?: string;
   size?: 'xl' | 'sm';
   renderSuffix?: (option: Option<T>) => ReactNode;
+  className?: string;
 }
 
 export const Select = <T extends string>({
@@ -26,7 +27,8 @@ export const Select = <T extends string>({
   onChange,
   placeholder = 'Select an option',
   size = 'xl',
-  renderSuffix
+  renderSuffix,
+  className
 }: SelectProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -58,7 +60,7 @@ export const Select = <T extends string>({
   const isDropdownOpen = isOpen && !readOnly;
 
   return (
-    <div className='Select__wrapper' ref={rootRef}>
+    <div className={classNames('Select__wrapper', className)} ref={rootRef}>
       <div
         className={classNames(
           'Select',

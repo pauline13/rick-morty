@@ -13,9 +13,11 @@ interface InputProps {
   showClear?: boolean;
   onChange: (value: string) => void;
   size?: 'xl' | 'sm';
+  clearIconSize?: 'xl' | 'sm';
   variant?: 'underline' | 'outline';
   readOnly?: boolean;
-  className?: string;
+  classNameWrapper?: string;
+  classNameInput?: string;
 }
 
 export const Input = ({
@@ -25,9 +27,11 @@ export const Input = ({
   showClear = true,
   onChange,
   size = 'xl',
+  clearIconSize = 'sm',
   variant = 'outline',
   readOnly = false,
-  className
+  classNameWrapper,
+  classNameInput
 }: InputProps) => {
   const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
@@ -42,7 +46,8 @@ export const Input = ({
         'Input',
         `Input_${size}`,
         !readOnly && `Input_${variant}`,
-        readOnly && 'Input_readonly'
+        readOnly && 'Input_readonly',
+        classNameWrapper
       )}
     >
       {rightIcon && <div>{rightIcon}</div>}
@@ -51,7 +56,7 @@ export const Input = ({
           'Input__field',
           `Input__field_${size}`,
           `Input__field_${variant}`,
-          className
+          classNameInput
         )}
         placeholder={placeholder}
         value={value}
@@ -59,7 +64,7 @@ export const Input = ({
         onChange={handleChangeValue}
       />
       {!readOnly && value !== '' && showClear && (
-        <ButtonIcon type='button' size='sm' onClick={handleClear}>
+        <ButtonIcon type='button' size={clearIconSize} onClick={handleClear}>
           <CloseIcon />
         </ButtonIcon>
       )}
