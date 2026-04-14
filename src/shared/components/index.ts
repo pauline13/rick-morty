@@ -5,3 +5,4 @@ export * from './Select/Select';
 export * from './StatusDot/StatusDot';
 export * from './Input/Input';
 export * from './ButtonIcon/ButtonIcon';
+export * from './EmptyState/EmptyState';

@@ -1,42 +1,52 @@
-import { useState } from 'react';
-
+import { useCharacters } from '@/entities/character/hooks';
 import { LogoXlIcon } from '@/shared/assets';
-import type { Character, Status } from '@/shared/types';
+import { EmptyState, Loader } from '@/shared/components';
+import { classNames } from '@/shared/helpers';
 import { CharacterCard, FiltersPanel } from '@/widgets';
 
 import './CharactersPage.css';
 
 export const CharactersPage = () => {
-  const [characters, setCharacters] = useState([
-    {
-      id: 1,
-      name: 'Rick Sanchez',
-      location: 'Earth',
-      status: 'alive' as Status
-    }
-  ]);
-
-  const handleCharacterChange = (updated: Character) => {
-    setCharacters((prev) =>
-      prev.map((c) => (c.id === updated.id ? updated : c))
-    );
-  };
+  const { characters, loading } = useCharacters();
 
   return (
     <div className='CharactersPage'>
       <div className='CharactersPage__logo'>
         <LogoXlIcon />
       </div>
-      <div className='CharactersPage__filters'>
-        <FiltersPanel />
-      </div>
-      {characters.map((char) => (
-        <CharacterCard
-          key={char.id}
-          character={char}
-          onChange={handleCharacterChange}
-        />
-      ))}
+      {loading ? (
+        <div className='CharactersPage__loader'>
+          <Loader size='xl' text='Loading characters...' />
+        </div>
+      ) : (
+        <>
+          <div className='CharactersPage__filters'>
+            <FiltersPanel />
+          </div>
+
+          <div
+            className={classNames('CharactersPage__content', {
+              CharactersPage__content_empty: characters.length === 0
+            })}
+          >
+            {characters.length === 0 ? (
+              <EmptyState title='Characters list is empty...' />
+            ) : (
+              <div className='CharactersPage__list'>
+                {characters.map((character) => (
+                  <CharacterCard
+                    key={character.id}
+                    character={character}
+                    onChange={() => {
+                      console.log('Waiting for Store lesson');
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };

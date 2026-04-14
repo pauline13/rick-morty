@@ -11,7 +11,7 @@ const ROUTES = [
   },
   {
     id: 'character-info',
-    path: '/character-info',
+    path: '/character-info/:id',
     element: <CharacterInfoPage />
   }
 ];
