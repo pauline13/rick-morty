@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-import type { Character } from '@/entities/character/model';
+import type { Character } from '@/entities/character';
 import { Input, Select, StatusDot } from '@/shared/components';
 import { STATUS_OPTIONS } from '@/shared/constants';
 

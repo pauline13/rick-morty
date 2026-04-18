@@ -1,4 +1,4 @@
-import { useCharacters } from '@/entities/character/hooks';
+import { useCharacters } from '@/entities/character/';
 import { LogoXlIcon } from '@/shared/assets';
 import { EmptyState, Loader } from '@/shared/components';
 import { classNames } from '@/shared/helpers';

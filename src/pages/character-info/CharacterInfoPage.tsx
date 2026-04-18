@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router';
 
-import { useCharacter } from '@/entities/character/hooks';
+import { useCharacter } from '@/entities/character/';
 import { ButtonBack, EmptyState, Loader } from '@/shared/components';
 import { CharacterCard } from '@/widgets';
 

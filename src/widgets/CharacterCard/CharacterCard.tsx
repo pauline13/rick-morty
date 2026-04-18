@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import type { Character } from '@/entities/character/model';
+import type { Character } from '@/entities/character';
 import { CheckIcon, CloseIcon, EditIcon } from '@/shared/assets';
 import { ButtonIcon } from '@/shared/components';
 import { classNames } from '@/shared/helpers';

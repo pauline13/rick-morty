@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
-import { getCharacters } from '@/entities/character/api';
-import type { Character } from '@/entities/character/model';
 import { isRequestCanceled } from '@/shared/helpers';
+
+import { getCharacters } from '../api';
+import type { Character } from '../model';
 
 export const useCharacters = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
