@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { CardImage, CheckIcon, CloseIcon, EditIcon } from '@/shared/assets';
+import type { Character } from '@/entities/character';
+import { CheckIcon, CloseIcon, EditIcon } from '@/shared/assets';
 import { ButtonIcon } from '@/shared/components';
 import { classNames } from '@/shared/helpers';
-import type { Character } from '@/shared/types';
 import { CharacterForm } from '@/widgets';
 
 import './CharacterCard.css';
@@ -23,7 +23,11 @@ export const CharacterCard = ({ character, onChange }: CharacterCardProps) => {
         isEditing && 'CharacterCard_editing'
       )}
     >
-      <img className='CharacterCard__image' src={CardImage} alt='' />
+      <img
+        className='CharacterCard__image'
+        src={character.image}
+        alt={character.name}
+      />
 
       <div className='CharacterCard__content'>
         <CharacterForm

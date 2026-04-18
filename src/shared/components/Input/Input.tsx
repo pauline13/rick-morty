@@ -7,11 +7,11 @@ import { classNames } from '@/shared/helpers';
 import './Input.css';
 
 interface InputProps {
-  placeholder?: string;
   value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
   rightIcon?: ReactNode;
   showClear?: boolean;
-  onChange: (value: string) => void;
   size?: 'xl' | 'sm';
   clearIconSize?: 'xl' | 'sm';
   variant?: 'underline' | 'outline';

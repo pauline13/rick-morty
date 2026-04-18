@@ -1,8 +1,8 @@
 import { Link } from 'react-router';
 
+import type { Character } from '@/entities/character';
 import { Input, Select, StatusDot } from '@/shared/components';
 import { STATUS_OPTIONS } from '@/shared/constants';
-import type { Character } from '@/shared/types';
 
 import './CharacterForm.css';
 
@@ -29,7 +29,10 @@ export const CharacterForm = ({
             onChange={(name) => onChange({ ...value, name })}
           />
         ) : (
-          <Link to={`/character-info`} className='CharacterForm__linkName'>
+          <Link
+            to={`/character-info/${value.id}`}
+            className='CharacterForm__linkName'
+          >
             {value.name}
           </Link>
         )}
@@ -46,11 +49,19 @@ export const CharacterForm = ({
         <p className='CharacterForm__label'>Location</p>
         <Input
           placeholder='Location'
-          value={value.location}
+          value={value.location.name}
           readOnly={!isEditing}
           variant='underline'
           size='sm'
-          onChange={(location) => onChange({ ...value, location })}
+          onChange={(location) =>
+            onChange({
+              ...value,
+              location: {
+                ...value.location,
+                name: location
+              }
+            })
+          }
         />
       </div>
       <div className='CharacterForm__field'>
