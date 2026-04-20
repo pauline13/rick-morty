@@ -8,6 +8,28 @@
   justify-content: center;
 }
 
+.CharactersPage__loader {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
 .CharactersPage__filters {
   margin: 16px 0 26px;
+}
+
+.CharactersPage__content {
+  width: 100%;
+}
+
+.CharactersPage__content_empty {
+  margin-top: 128px;
+}
+
+.CharactersPage__list {
+  display: grid;
+  grid-template-columns: auto auto;
+  row-gap: 3rem;
+  justify-content: space-between;
+  list-style: none;
 }

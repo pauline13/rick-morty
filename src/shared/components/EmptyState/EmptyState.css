@@ -1,0 +1,9 @@
+.EmptyState {
+  display: flex;
+  justify-content: center;
+}
+
+.EmptyState__title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-xl);
+}

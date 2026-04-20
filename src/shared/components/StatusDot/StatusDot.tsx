@@ -1,6 +1,7 @@
 import { classNames } from '@/shared/helpers';
-import './StatusDot.css';
 import type { Status } from '@/shared/types';
+
+import './StatusDot.css';
 
 const STATUS_COLOR: Record<Status, string> = {
   alive: 'green',

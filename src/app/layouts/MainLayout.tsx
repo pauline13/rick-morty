@@ -1,3 +1,4 @@
+import { Toaster } from 'react-hot-toast';
 import { Outlet } from 'react-router';
 
 import { Footer, Header } from '@/widgets';
@@ -11,6 +12,8 @@ export const MainLayout = () => {
         <Outlet />
       </main>
       <Footer />
+
+      <Toaster position='bottom-right' />
     </div>
   );
 };
