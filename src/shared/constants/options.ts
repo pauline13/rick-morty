@@ -1,6 +1,13 @@
 import type { Option } from '@/shared/components';
 import type { Gender, Species, Status } from '@/shared/types';
 
+const ALL_FILTER_VALUE = 'all';
+
+export const ALL_FILTER_OPTION: Option<typeof ALL_FILTER_VALUE> = {
+  label: 'All',
+  value: ALL_FILTER_VALUE
+};
+
 export const STATUS_OPTIONS: Option<Status>[] = [
   { label: 'Alive', value: 'alive' },
   { label: 'Dead', value: 'dead' },

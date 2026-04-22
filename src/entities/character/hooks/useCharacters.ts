@@ -2,13 +2,16 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 import { isRequestCanceled } from '@/shared/helpers';
+import { useDebounce } from '@/shared/hooks';
 
 import { getCharacters } from '../api';
-import type { Character } from '../model';
+import type { Character, CharactersFilters } from '../model';
 
-export const useCharacters = () => {
+export const useCharacters = (filters: CharactersFilters) => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(false);
+
+  const debouncedName = useDebounce(filters.name);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -17,7 +20,13 @@ export const useCharacters = () => {
       try {
         setLoading(true);
 
-        const data = await getCharacters(controller.signal);
+        const data = await getCharacters(
+          {
+            ...filters,
+            name: debouncedName
+          },
+          controller.signal
+        );
         setCharacters(data);
       } catch (error: unknown) {
         if (isRequestCanceled(error)) return;
@@ -34,7 +43,8 @@ export const useCharacters = () => {
     return () => {
       controller.abort();
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedName, filters.status, filters.species, filters.gender]);
 
   return {
     characters,

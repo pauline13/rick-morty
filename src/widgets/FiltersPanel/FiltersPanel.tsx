@@ -1,52 +1,73 @@
-import { useState } from 'react';
-
+import type { CharactersFilters } from '@/entities/character';
 import { SearchIcon } from '@/shared/assets';
 import { Input, Select } from '@/shared/components';
 import {
-  GENDER_OPTIONS,
+  STATUS_OPTIONS,
+  ALL_FILTER_OPTION,
   SPECIES_OPTIONS,
-  STATUS_OPTIONS
+  GENDER_OPTIONS
 } from '@/shared/constants';
-import type { Status, Species, Gender } from '@/shared/types';
-
+import { toFilterValue, withAllOption } from '@/shared/helpers';
 import './FiltersPanel.css';
 
-export const FiltersPanel = () => {
-  const [name, setName] = useState('');
-  const [status, setStatus] = useState<Status | ''>('');
-  const [species, setSpecies] = useState<Species | ''>('');
-  const [gender, setGender] = useState<Gender | ''>('');
+interface FiltersPanelProps {
+  value: CharactersFilters;
+  onChange: (value: CharactersFilters) => void;
+}
 
+const STATUS_FILTER_OPTIONS = withAllOption(STATUS_OPTIONS, ALL_FILTER_OPTION);
+const SPECIES_FILTER_OPTIONS = withAllOption(
+  SPECIES_OPTIONS,
+  ALL_FILTER_OPTION
+);
+const GENDER_FILTER_OPTIONS = withAllOption(GENDER_OPTIONS, ALL_FILTER_OPTION);
+
+export const FiltersPanel = ({ value, onChange }: FiltersPanelProps) => {
   return (
     <div className='FiltersPanel'>
       <Input
         classNameWrapper='FiltersPanel__field'
         placeholder='Filter by name...'
-        value={name}
-        onChange={setName}
+        value={value.name}
+        onChange={(name) => onChange({ ...value, name })}
         rightIcon={<SearchIcon />}
         clearIconSize='xl'
       />
       <Select
         className='FiltersPanel__field'
-        value={species}
-        options={SPECIES_OPTIONS}
+        value={value.species}
+        options={SPECIES_FILTER_OPTIONS}
         placeholder='Species'
-        onChange={setSpecies}
+        onChange={(species) =>
+          onChange({
+            ...value,
+            species: toFilterValue(species, SPECIES_OPTIONS)
+          })
+        }
       />
       <Select
         className='FiltersPanel__field'
-        value={gender}
-        options={GENDER_OPTIONS}
+        value={value.gender}
+        options={GENDER_FILTER_OPTIONS}
         placeholder='Gender'
-        onChange={setGender}
+        onChange={(gender) =>
+          onChange({
+            ...value,
+            gender: toFilterValue(gender, GENDER_OPTIONS)
+          })
+        }
       />
       <Select
         className='FiltersPanel__field'
-        value={status}
-        options={STATUS_OPTIONS}
+        value={value.status}
+        options={STATUS_FILTER_OPTIONS}
         placeholder='Status'
-        onChange={setStatus}
+        onChange={(status) =>
+          onChange({
+            ...value,
+            status: toFilterValue(status, STATUS_OPTIONS)
+          })
+        }
       />
     </div>
   );

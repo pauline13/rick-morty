@@ -39,11 +39,11 @@ export const CharacterForm = ({
       </div>
       <div className='CharacterForm__field'>
         <p className='CharacterForm__label'>Gender</p>
-        <p className='CharacterForm__value'>Male</p>
+        <p className='CharacterForm__value'>{value.gender}</p>
       </div>
       <div className='CharacterForm__field'>
         <p className='CharacterForm__label'>Species</p>
-        <p className='CharacterForm__value'>Human</p>
+        <p className='CharacterForm__value'>{value.species}</p>
       </div>
       <div className='CharacterForm__field'>
         <p className='CharacterForm__label'>Location</p>

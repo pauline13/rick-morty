@@ -1,4 +1,6 @@
-import { useCharacters } from '@/entities/character/';
+import { useState } from 'react';
+
+import { useCharacters, type CharactersFilters } from '@/entities/character/';
 import { LogoXlIcon } from '@/shared/assets';
 import { EmptyState, Loader } from '@/shared/components';
 import { classNames } from '@/shared/helpers';
@@ -7,12 +9,22 @@ import { CharacterCard, FiltersPanel } from '@/widgets';
 import './CharactersPage.css';
 
 export const CharactersPage = () => {
-  const { characters, loading } = useCharacters();
+  const [filters, setFilters] = useState<CharactersFilters>({
+    name: '',
+    status: '',
+    species: '',
+    gender: ''
+  });
+
+  const { characters, loading } = useCharacters(filters);
 
   return (
     <div className='CharactersPage'>
       <div className='CharactersPage__logo'>
         <LogoXlIcon />
+      </div>
+      <div className='CharactersPage__filters'>
+        <FiltersPanel value={filters} onChange={setFilters} />
       </div>
       {loading ? (
         <div className='CharactersPage__loader'>
@@ -20,10 +32,6 @@ export const CharactersPage = () => {
         </div>
       ) : (
         <>
-          <div className='CharactersPage__filters'>
-            <FiltersPanel />
-          </div>
-
           <div
             className={classNames('CharactersPage__content', {
               CharactersPage__content_empty: characters.length === 0

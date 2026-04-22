@@ -6,3 +6,4 @@ export * from './StatusDot/StatusDot';
 export * from './Input/Input';
 export * from './ButtonIcon/ButtonIcon';
 export * from './EmptyState/EmptyState';
+export * from './ErrorBoundary/ErrorBoundary';
