@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 import { isRequestCanceled } from '@/shared/helpers';
@@ -9,45 +9,71 @@ import type { Character, CharactersFilters } from '../model';
 
 export const useCharacters = (filters: CharactersFilters) => {
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const debouncedName = useDebounce(filters.name);
+
+  useEffect(() => {
+    setCharacters([]);
+    setPage(1);
+    setHasMore(true);
+  }, [debouncedName, filters.status, filters.species, filters.gender]);
 
   useEffect(() => {
     const controller = new AbortController();
 
     const fetchCharacters = async () => {
       try {
-        setLoading(true);
+        if (page === 1) {
+          setIsLoading(true);
+        } else {
+          setIsLoadingMore(true);
+        }
 
         const data = await getCharacters(
           {
             ...filters,
-            name: debouncedName
+            name: debouncedName,
+            page
           },
           controller.signal
         );
-        setCharacters(data);
+
+        setCharacters((prev) =>
+          page === 1 ? data.results : [...prev, ...data.results]
+        );
+
+        setHasMore(Boolean(data.info.next));
       } catch (error: unknown) {
         if (isRequestCanceled(error)) return;
 
         toast.error('Failed to load characters');
-        setCharacters([]);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
+        setIsLoadingMore(false);
       }
     };
 
     fetchCharacters();
 
-    return () => {
-      controller.abort();
-    };
+    return () => controller.abort();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedName, filters.status, filters.species, filters.gender]);
+  }, [page, debouncedName, filters.status, filters.species, filters.gender]);
+
+  const loadMore = useCallback(() => {
+    if (!hasMore || isLoadingMore) return;
+    setPage((prev) => prev + 1);
+  }, [hasMore, isLoadingMore]);
 
   return {
     characters,
-    loading
+    isLoading,
+    isLoadingMore,
+    hasMore,
+    loadMore
   };
 };

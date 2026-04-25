@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { useCharacters, type CharactersFilters } from '@/entities/character/';
 import { LogoXlIcon } from '@/shared/assets';
-import { EmptyState, Loader } from '@/shared/components';
+import { EmptyState, Loader, InfiniteScroll } from '@/shared/components';
 import { classNames } from '@/shared/helpers';
 import { CharacterCard, FiltersPanel } from '@/widgets';
 
@@ -16,17 +16,21 @@ export const CharactersPage = () => {
     gender: ''
   });
 
-  const { characters, loading } = useCharacters(filters);
+  const { characters, isLoading, isLoadingMore, hasMore, loadMore } =
+    useCharacters(filters);
+
+  const isEmpty = !isLoading && characters.length === 0;
 
   return (
     <div className='CharactersPage'>
       <div className='CharactersPage__logo'>
         <LogoXlIcon />
       </div>
+
       <div className='CharactersPage__filters'>
         <FiltersPanel value={filters} onChange={setFilters} />
       </div>
-      {loading ? (
+      {isLoading ? (
         <div className='CharactersPage__loader'>
           <Loader size='xl' text='Loading characters...' />
         </div>
@@ -34,23 +38,35 @@ export const CharactersPage = () => {
         <>
           <div
             className={classNames('CharactersPage__content', {
-              CharactersPage__content_empty: characters.length === 0
+              CharactersPage__content_empty: isEmpty
             })}
           >
-            {characters.length === 0 ? (
+            {isEmpty ? (
               <EmptyState title='Characters list is empty...' />
             ) : (
-              <div className='CharactersPage__list'>
-                {characters.map((character) => (
-                  <CharacterCard
-                    key={character.id}
-                    character={character}
-                    onChange={() => {
-                      console.log('Waiting for Store lesson');
-                    }}
+              <>
+                <div className='CharactersPage__list'>
+                  {characters.map((character) => (
+                    <CharacterCard
+                      key={character.id}
+                      character={character}
+                      onChange={() => {
+                        console.log('Waiting for Store lesson');
+                      }}
+                    />
+                  ))}
+                </div>
+                {hasMore && (
+                  <InfiniteScroll
+                    hasMore={hasMore}
+                    isLoadingMore={isLoadingMore}
+                    onLoadMore={loadMore}
+                    loader={
+                      <Loader className='CharactersPage__loader' size='sm' />
+                    }
                   />
-                ))}
-              </div>
+                )}
+              </>
             )}
           </div>
         </>
