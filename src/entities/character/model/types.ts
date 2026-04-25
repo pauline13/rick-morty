@@ -1,4 +1,4 @@
-import type { Status } from '@/shared/types';
+import type { Gender, Species, Status } from '@/shared/types';
 
 export interface CharacterLocation {
   name: string;
@@ -9,11 +9,18 @@ export interface Character {
   id: number;
   name: string;
   status: Status;
-  species: string;
+  species: Species;
   type: string;
-  gender: string;
+  gender: Gender;
   location: CharacterLocation;
   image: string;
   url: string;
   origin?: CharacterLocation;
+}
+
+export interface CharactersFilters {
+  name: string;
+  status: Status | '';
+  species: Species | '';
+  gender: Gender | '';
 }

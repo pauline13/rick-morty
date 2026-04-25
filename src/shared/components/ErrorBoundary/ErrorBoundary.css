@@ -1,0 +1,17 @@
+.ErrorBoundary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  gap: 2rem;
+}
+
+.ErrorBoundary__title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-header-s);
+}
+
+.ErrorBoundary__button {
+  width: 240px;
+}
