@@ -5,11 +5,12 @@ import './Loader.css';
 interface LoaderProps {
   size?: 'xl' | 'sm';
   text?: string;
+  className?: string;
 }
 
-export const Loader = ({ size = 'sm', text }: LoaderProps) => {
+export const Loader = ({ size = 'sm', text, className }: LoaderProps) => {
   return (
-    <div className={classNames('Loader', `Loader_${size}`)}>
+    <div className={classNames('Loader', `Loader_${size}`, className)}>
       <LoaderIcon className='Loader__icon' />
       {text && <p className='Loader__text'>{text}</p>}
     </div>
