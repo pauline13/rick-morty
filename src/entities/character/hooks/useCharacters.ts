@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { toast } from 'react-hot-toast';
 
-import { isRequestCanceled } from '@/shared/helpers';
+import { handleRequestError } from '@/shared/helpers';
 import { useDebounce } from '@/shared/hooks';
 
 import { getCharacters } from '../api';
@@ -49,9 +48,13 @@ export const useCharacters = (filters: CharactersFilters) => {
 
         setHasMore(Boolean(data.info.next));
       } catch (error: unknown) {
-        if (isRequestCanceled(error)) return;
+        const errorType = handleRequestError(error, {
+          unknown: 'Failed to load characters',
+          network: 'Failed to load characters. Check your internet connection',
+          server: 'Failed to load characters. Please try again later'
+        });
 
-        toast.error('Failed to load characters');
+        if (errorType === 'canceled') return;
       } finally {
         setIsLoading(false);
         setIsLoadingMore(false);
@@ -69,11 +72,18 @@ export const useCharacters = (filters: CharactersFilters) => {
     setPage((prev) => prev + 1);
   }, [hasMore, isLoadingMore]);
 
+  const updateCharacter = useCallback((value: Character) => {
+    setCharacters((prev) =>
+      prev.map((character) => (character.id === value.id ? value : character))
+    );
+  }, []);
+
   return {
     characters,
     isLoading,
     isLoadingMore,
     hasMore,
-    loadMore
+    loadMore,
+    updateCharacter
   };
 };

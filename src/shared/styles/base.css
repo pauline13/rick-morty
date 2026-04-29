@@ -10,6 +10,8 @@
 body {
   font-family: var(--font-primary);
   font-size: var(--font-size-l);
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
 }
 
 :root {
@@ -22,6 +24,7 @@ body {
   --font-size-m: 14px;
 
   --font-size-header-s: 28px;
+  --font-size-header-xl: 48px;
 
   --background-default: white;
   --background-default-hover: #f5f5f5;
@@ -36,6 +39,7 @@ body {
 
   --border-black: black;
   --border-grey: #393939;
+  --border-light-grey: #f2f2f7;
 
   --shadow-light: rgb(0 0 0 / 10%);
   --shadow-medium: rgb(0 0 0 / 25%);
