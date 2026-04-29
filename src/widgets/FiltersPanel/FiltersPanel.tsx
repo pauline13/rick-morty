@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import type { CharactersFilters } from '@/entities/character';
 import { SearchIcon } from '@/shared/assets';
 import { Input, Select } from '@/shared/components';
@@ -22,7 +24,7 @@ const SPECIES_FILTER_OPTIONS = withAllOption(
 );
 const GENDER_FILTER_OPTIONS = withAllOption(GENDER_OPTIONS, ALL_FILTER_OPTION);
 
-export const FiltersPanel = ({ value, onChange }: FiltersPanelProps) => {
+export const FiltersPanel = memo(({ value, onChange }: FiltersPanelProps) => {
   return (
     <div className='FiltersPanel'>
       <Input
@@ -71,4 +73,4 @@ export const FiltersPanel = ({ value, onChange }: FiltersPanelProps) => {
       />
     </div>
   );
-};
+});
