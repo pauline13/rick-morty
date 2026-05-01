@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
-import { useCharacters, type CharactersFilters } from '@/entities/character/';
-import { CharactersList } from '@/pages/characters/components';
+import { useCharacters, type CharactersFilters } from '@/entities/character';
 import { LogoXlIcon } from '@/shared/assets';
 import { EmptyState, Loader, InfiniteScroll } from '@/shared/components';
 import { classNames } from '@/shared/helpers';
 import { FiltersPanel } from '@/widgets';
+
+import { CharactersList } from './components';
 
 import './CharactersPage.css';
 
@@ -63,7 +64,11 @@ export const CharactersPage = () => {
       </div>
 
       <div className='CharactersPage__filters'>
-        <FiltersPanel value={filters} onChange={setFilters} />
+        <FiltersPanel
+          value={filters}
+          onChange={setFilters}
+          disabled={isLoading}
+        />
       </div>
 
       <div

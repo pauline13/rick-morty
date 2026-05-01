@@ -13,6 +13,7 @@ interface SelectProps<T extends string = string> {
   options: Option<T>[];
   value: T;
   onChange: (value: T) => void;
+  disabled?: boolean;
   readOnly?: boolean;
   placeholder?: string;
   size?: 'xl' | 'sm';
@@ -23,8 +24,9 @@ interface SelectProps<T extends string = string> {
 export const Select = <T extends string>({
   options,
   value,
-  readOnly = false,
   onChange,
+  disabled = false,
+  readOnly = false,
   placeholder = 'Select an option',
   size = 'xl',
   renderSuffix,
@@ -47,17 +49,17 @@ export const Select = <T extends string>({
   const selectedOption = options.find((option) => option.value === value);
 
   const handleToggle = () => {
-    if (readOnly) return;
+    if (readOnly || disabled) return;
     setIsOpen((prev) => !prev);
   };
 
   const handleSelect = (selectedValue: T) => {
-    if (readOnly) return;
+    if (readOnly || disabled) return;
     onChange(selectedValue);
     setIsOpen(false);
   };
 
-  const isDropdownOpen = isOpen && !readOnly;
+  const isDropdownOpen = isOpen && !readOnly && !disabled;
 
   return (
     <div className={classNames('Select__wrapper', className)} ref={rootRef}>
