@@ -1,6 +1,7 @@
 .CharactersPage {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .CharactersPage__logo {
@@ -25,12 +26,4 @@
 
 .CharactersPage__content_empty {
   margin-top: 128px;
-}
-
-.CharactersPage__list {
-  display: grid;
-  grid-template-columns: auto auto;
-  row-gap: 3rem;
-  justify-content: space-between;
-  list-style: none;
 }

@@ -10,6 +10,7 @@ interface InputProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  disabled?: boolean;
   rightIcon?: ReactNode;
   showClear?: boolean;
   size?: 'xl' | 'sm';
@@ -21,11 +22,12 @@ interface InputProps {
 }
 
 export const Input = ({
-  placeholder = 'Input value',
   value,
+  onChange,
+  placeholder = 'Input value',
+  disabled = false,
   rightIcon,
   showClear = true,
-  onChange,
   size = 'xl',
   clearIconSize = 'sm',
   variant = 'outline',
@@ -61,6 +63,7 @@ export const Input = ({
         placeholder={placeholder}
         value={value}
         readOnly={readOnly}
+        disabled={disabled}
         onChange={handleChangeValue}
       />
       {!readOnly && value !== '' && showClear && (

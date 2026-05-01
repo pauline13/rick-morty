@@ -1,5 +1,61 @@
+.CharacterInfoPage {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  justify-content: space-between;
+}
+
 .CharacterInfoPage__loader {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.CharacterInfoPage__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.CharacterInfoPage__img {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 5px solid var(--border-light-grey);
+}
+
+.CharacterInfoPage__name {
+  font-size: var(--font-size-header-xl);
+  margin: 16px 0 42px;
+}
+
+.CharacterInfoPage__infoTitle {
+  font-size: var(--font-size-xxl);
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 36px;
+}
+
+.CharacterInfoPage__fields {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  gap: 16px;
+}
+
+.CharacterInfoPage__field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  border-bottom: 1px solid var(--border-light-grey);
+  padding-bottom: 14px;
+}
+
+.CharacterInfoPage__fieldLabel {
+  font-weight: 700;
+}
+
+.CharacterInfoPage__fieldValue {
+  font-size: var(--font-size-m);
+  font-weight: 400;
+  color: var(--text-secondary);
 }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { toast } from 'react-hot-toast';
 
-import { isRequestCanceled } from '@/shared/helpers';
+import { handleRequestError } from '@/shared/helpers';
 
 import { getCharacter } from '../api';
 import type { Character } from '../model';
@@ -22,9 +21,14 @@ export const useCharacter = (id: number) => {
         const data = await getCharacter(id, controller.signal);
         setCharacter(data);
       } catch (error: unknown) {
-        if (isRequestCanceled(error)) return;
+        const errorType = handleRequestError(error, {
+          unknown: 'Failed to load character',
+          network: 'Failed to load character. Check your internet connection',
+          server: 'Failed to load character. Please try again later'
+        });
 
-        toast.error('Failed to load character');
+        if (errorType === 'canceled') return;
+
         setCharacter(null);
       } finally {
         setLoading(false);
