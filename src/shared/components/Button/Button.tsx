@@ -6,13 +6,24 @@ interface ButtonProps {
   icon?: React.ReactNode;
   onClick?: () => void;
   className?: string;
+  textClassName?: string;
 }
 
-export const Button = ({ text, icon, onClick, className }: ButtonProps) => {
+export const Button = ({
+  text,
+  icon,
+  onClick,
+  className,
+  textClassName
+}: ButtonProps) => {
   return (
     <button className={classNames('Button', className)} onClick={onClick}>
       {icon && <span className='Button__icon'>{icon}</span>}
-      {text && <span className='Button__text'>{text}</span>}
+      {text && (
+        <span className={classNames('Button__text', textClassName)}>
+          {text}
+        </span>
+      )}
     </button>
   );
 };

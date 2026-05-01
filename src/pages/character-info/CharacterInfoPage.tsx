@@ -1,8 +1,8 @@
-import { useNavigate, useParams } from 'react-router';
+import { Navigate, useNavigate, useParams } from 'react-router';
 
 import { useCharacter, type Character } from '@/entities/character/';
 import { formatFieldValue } from '@/pages/character-info/lib';
-import { ButtonBack, EmptyState, Loader } from '@/shared/components';
+import { ButtonBack, Loader } from '@/shared/components';
 
 import './CharacterInfoPage.css';
 
@@ -18,7 +18,11 @@ const CHARACTER_FIELDS: { key: keyof Character; label: string }[] = [
 export const CharacterInfoPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { character, loading } = useCharacter(Number(id));
+  const { character, isLoading, isNotFound } = useCharacter(Number(id));
+
+  if (isNotFound) {
+    return <Navigate to='/not-found' replace />;
+  }
 
   return (
     <section className='CharacterInfoPage'>
@@ -26,15 +30,13 @@ export const CharacterInfoPage = () => {
         <ButtonBack onClick={() => navigate('/')} />
       </div>
 
-      {loading && (
+      {isLoading && (
         <div className='CharacterInfoPage__loader'>
           <Loader size='xl' text='Loading character card...' />
         </div>
       )}
 
-      {!loading && !character && <EmptyState title='Character is not found' />}
-
-      {!loading && character && (
+      {!isLoading && character && (
         <div className='CharacterInfoPage__container'>
           <img
             className='CharacterInfoPage__img'

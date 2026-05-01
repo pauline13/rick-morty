@@ -1,10 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { handleRequestError } from '@/shared/helpers';
+import {
+  createErrorMessages,
+  handleRequestError,
+  REQUEST_ERROR_TYPE
+} from '@/shared/helpers';
 import { useDebounce } from '@/shared/hooks';
 
 import { getCharacters } from '../api';
 import type { Character, CharactersFilters } from '../model';
+
+const CHARACTERS_ERROR_MESSAGES = createErrorMessages('characters');
 
 export const useCharacters = (filters: CharactersFilters) => {
   const [characters, setCharacters] = useState<Character[]>([]);
@@ -48,13 +54,9 @@ export const useCharacters = (filters: CharactersFilters) => {
 
         setHasMore(Boolean(data.info.next));
       } catch (error: unknown) {
-        const errorType = handleRequestError(error, {
-          unknown: 'Failed to load characters',
-          network: 'Failed to load characters. Check your internet connection',
-          server: 'Failed to load characters. Please try again later'
-        });
+        const errorType = handleRequestError(error, CHARACTERS_ERROR_MESSAGES);
 
-        if (errorType === 'canceled') return;
+        if (errorType === REQUEST_ERROR_TYPE.CANCELED) return;
       } finally {
         setIsLoading(false);
         setIsLoadingMore(false);

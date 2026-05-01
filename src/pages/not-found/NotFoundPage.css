@@ -1,0 +1,19 @@
+.NotFoundPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  gap: 70px;
+}
+
+.NotFoundPage__button {
+  width: 240px;
+  height: 56px;
+}
+
+.NotFoundPage__buttonText {
+  color: var(--text-primary);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-xl);
+}

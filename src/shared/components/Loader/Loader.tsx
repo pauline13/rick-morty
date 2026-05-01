@@ -1,4 +1,4 @@
-import { LoaderIcon } from '@/shared/assets';
+import { loaderImage } from '@/shared/assets';
 import { classNames } from '@/shared/helpers';
 import './Loader.css';
 
@@ -11,7 +11,7 @@ interface LoaderProps {
 export const Loader = ({ size = 'sm', text, className }: LoaderProps) => {
   return (
     <div className={classNames('Loader', `Loader_${size}`, className)}>
-      <LoaderIcon className='Loader__icon' />
+      <img src={loaderImage} alt='loader' className='Loader__img' />
       {text && <p className='Loader__text'>{text}</p>}
     </div>
   );
