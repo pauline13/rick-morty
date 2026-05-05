@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router';
 
 import { MainLayout } from '@/app/layouts';
-import { CharactersPage, CharacterInfoPage } from '@/pages';
+import { CharactersPage, NotFoundPage, CharacterInfoGuard } from '@/pages';
 
 const ROUTES = [
   {
@@ -12,7 +12,7 @@ const ROUTES = [
   {
     id: 'character-info',
     path: '/character-info/:id',
-    element: <CharacterInfoPage />
+    element: <CharacterInfoGuard />
   }
 ];
 
@@ -23,6 +23,7 @@ export function AppRouter() {
         {ROUTES.map((route) => (
           <Route key={route.id} path={route.path} element={route.element} />
         ))}
+        <Route path='*' element={<NotFoundPage />} />
       </Route>
     </Routes>
   );

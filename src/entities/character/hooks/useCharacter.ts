@@ -1,13 +1,22 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 
-import { handleRequestError } from '@/shared/helpers';
+import {
+  createErrorMessages,
+  handleRequestError,
+  REQUEST_ERROR_TYPE
+} from '@/shared/helpers';
 
 import { getCharacter } from '../api';
 import type { Character } from '../model';
 
+const CHARACTER_ERROR_MESSAGES = createErrorMessages('character');
+
 export const useCharacter = (id: number) => {
+  const navigate = useNavigate();
+
   const [character, setCharacter] = useState<Character | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!id || Number.isNaN(id)) return;
@@ -16,22 +25,23 @@ export const useCharacter = (id: number) => {
 
     const fetchCharacter = async () => {
       try {
-        setLoading(true);
+        setIsLoading(true);
 
         const data = await getCharacter(id, controller.signal);
         setCharacter(data);
       } catch (error: unknown) {
-        const errorType = handleRequestError(error, {
-          unknown: 'Failed to load character',
-          network: 'Failed to load character. Check your internet connection',
-          server: 'Failed to load character. Please try again later'
-        });
+        const errorType = handleRequestError(error, CHARACTER_ERROR_MESSAGES);
 
-        if (errorType === 'canceled') return;
+        if (errorType === REQUEST_ERROR_TYPE.CANCELED) return;
+
+        if (errorType === REQUEST_ERROR_TYPE.NOT_FOUND) {
+          navigate('/not-found', { replace: true });
+          return;
+        }
 
         setCharacter(null);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -40,10 +50,10 @@ export const useCharacter = (id: number) => {
     return () => {
       controller.abort();
     };
-  }, [id]);
+  }, [id, navigate]);
 
   return {
     character,
-    loading
+    isLoading
   };
 };

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useCharacters, type CharactersFilters } from '@/entities/character';
-import { LogoXlIcon } from '@/shared/assets';
+import { logoXlImage } from '@/shared/assets';
 import { EmptyState, Loader, InfiniteScroll } from '@/shared/components';
 import { classNames } from '@/shared/helpers';
 import { FiltersPanel } from '@/widgets';
@@ -60,9 +60,8 @@ export const CharactersPage = () => {
   return (
     <div className='CharactersPage'>
       <div className='CharactersPage__logo'>
-        <LogoXlIcon />
+        <img src={logoXlImage} alt='logo' />
       </div>
-
       <div className='CharactersPage__filters'>
         <FiltersPanel
           value={filters}
