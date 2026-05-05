@@ -1,4 +1,4 @@
-import { Navigate, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 import { useCharacter, type Character } from '@/entities/character/';
 import { formatFieldValue } from '@/pages/character-info/lib';
@@ -18,11 +18,7 @@ const CHARACTER_FIELDS: { key: keyof Character; label: string }[] = [
 export const CharacterInfoPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { character, isLoading, isNotFound } = useCharacter(Number(id));
-
-  if (isNotFound) {
-    return <Navigate to='/not-found' replace />;
-  }
+  const { character, isLoading } = useCharacter(Number(id));
 
   return (
     <section className='CharacterInfoPage'>
