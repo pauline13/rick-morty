@@ -6,9 +6,11 @@ import { ErrorBoundary } from '@/shared/components/';
 import App from './App.tsx';
 import '@/shared/styles/main.css';
 
+const basename = import.meta.env.VITE_BASE_PATH || '/';
+
 createRoot(document.getElementById('root')!).render(
   <ErrorBoundary>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <App />
     </BrowserRouter>
   </ErrorBoundary>
