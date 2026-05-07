@@ -1,5 +1,5 @@
-import loaderImage from './loader.png';
-import logoXlImage from './logo-xl.png';
-import notFoundImage from './not-found.png';
+import loaderImage from './loader.webp';
+import logoXlImage from './logo-xl.webp';
+import notFoundImage from './not-found.webp';
 
 export { notFoundImage, logoXlImage, loaderImage };
