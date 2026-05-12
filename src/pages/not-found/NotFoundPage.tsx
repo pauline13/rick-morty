@@ -8,8 +8,8 @@ import './NotFoundPage.css';
 export const NotFoundPage = () => {
   const navigate = useNavigate();
   return (
-    <div className='NotFoundPage'>
-      <img src={notFoundImage} alt='not-found' />
+    <section className='NotFoundPage'>
+      <img src={notFoundImage} alt='Page not found' />
       <Button
         className='NotFoundPage__button'
         textClassName='NotFoundPage__buttonText'
@@ -18,6 +18,6 @@ export const NotFoundPage = () => {
           navigate('/');
         }}
       />
-    </div>
+    </section>
   );
 };

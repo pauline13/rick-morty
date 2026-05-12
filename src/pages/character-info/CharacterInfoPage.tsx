@@ -22,9 +22,9 @@ export const CharacterInfoPage = () => {
 
   return (
     <section className='CharacterInfoPage'>
-      <div>
+      <nav>
         <ButtonBack onClick={() => navigate('/')} />
-      </div>
+      </nav>
 
       {isLoading && (
         <div className='CharacterInfoPage__loader'>
@@ -39,18 +39,18 @@ export const CharacterInfoPage = () => {
             src={character.image}
             alt={character.name}
           />
-          <p className='CharacterInfoPage__name'>{character.name}</p>
-          <p className='CharacterInfoPage__infoTitle'>Information</p>
-          <div className='CharacterInfoPage__fields'>
+          <h1 className='CharacterInfoPage__name'>{character.name}</h1>
+          <h2 className='CharacterInfoPage__infoTitle'>Information</h2>
+          <dl className='CharacterInfoPage__fields'>
             {CHARACTER_FIELDS.map((field) => (
               <div className='CharacterInfoPage__field' key={field.key}>
-                <p className='CharacterInfoPage__fieldLabel'>{field.label}</p>
-                <p className='CharacterInfoPage__fieldValue'>
+                <dt className='CharacterInfoPage__fieldLabel'>{field.label}</dt>
+                <dd className='CharacterInfoPage__fieldValue'>
                   {formatFieldValue(character[field.key])}
-                </p>
+                </dd>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
       )}
     </section>

@@ -34,7 +34,7 @@ export const CharacterCard = memo(
     };
 
     return (
-      <div
+      <article
         className={classNames(
           'CharacterCard',
           isEditing && 'CharacterCard_editing'
@@ -70,7 +70,7 @@ export const CharacterCard = memo(
             </>
           )}
         </div>
-      </div>
+      </article>
     );
   }
 );

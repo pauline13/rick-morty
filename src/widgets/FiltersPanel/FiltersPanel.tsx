@@ -28,7 +28,7 @@ const GENDER_FILTER_OPTIONS = withAllOption(GENDER_OPTIONS, ALL_FILTER_OPTION);
 export const FiltersPanel = memo(
   ({ value, onChange, disabled }: FiltersPanelProps) => {
     return (
-      <div className='FiltersPanel'>
+      <section className='FiltersPanel'>
         <Input
           classNameWrapper='FiltersPanel__field'
           placeholder='Filter by name...'
@@ -77,7 +77,7 @@ export const FiltersPanel = memo(
           }
           disabled={disabled}
         />
-      </div>
+      </section>
     );
   }
 );

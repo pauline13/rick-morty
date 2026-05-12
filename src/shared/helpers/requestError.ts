@@ -6,6 +6,7 @@ export const REQUEST_ERROR_TYPE = {
   NOT_FOUND: 'notFound',
   NETWORK: 'network',
   SERVER: 'server',
+  RATE_LIMITED: 'rateLimited',
   UNKNOWN: 'unknown'
 } as const;
 
@@ -17,6 +18,7 @@ export const DEFAULT_REQUEST_ERROR_MESSAGES: Partial<
 > = {
   [REQUEST_ERROR_TYPE.NETWORK]: 'Check your internet connection',
   [REQUEST_ERROR_TYPE.SERVER]: 'Server error. Please try again later',
+  [REQUEST_ERROR_TYPE.RATE_LIMITED]: 'Too many requests. Please wait a moment',
   [REQUEST_ERROR_TYPE.UNKNOWN]: 'Something went wrong. Please try again'
 };
 
@@ -40,6 +42,10 @@ export const getRequestErrorType = (error: unknown): RequestErrorType => {
 
   if (error.response.status === 404) {
     return REQUEST_ERROR_TYPE.NOT_FOUND;
+  }
+
+  if (error.response.status === 429) {
+    return REQUEST_ERROR_TYPE.RATE_LIMITED;
   }
 
   if (error.response.status >= 500) {

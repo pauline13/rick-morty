@@ -23,7 +23,9 @@ export const CharactersPage = () => {
     isLoading,
     isLoadingMore,
     hasMore,
+    hasError,
     loadMore,
+    retry,
     updateCharacter
   } = useCharacters(filters);
 
@@ -38,7 +40,9 @@ export const CharactersPage = () => {
         <InfiniteScroll
           hasMore={hasMore}
           isLoadingMore={isLoadingMore}
+          hasError={hasError}
           onLoadMore={loadMore}
+          onRetry={retry}
           loader={<Loader className='CharactersPage__loader' size='sm' />}
         />
       )}
@@ -58,25 +62,25 @@ export const CharactersPage = () => {
   }
 
   return (
-    <div className='CharactersPage'>
-      <div className='CharactersPage__logo'>
-        <img src={logoXlImage} alt='logo' />
-      </div>
-      <div className='CharactersPage__filters'>
+    <section className='CharactersPage'>
+      <figure className='CharactersPage__logo'>
+        <img src={logoXlImage} alt='Rick and Morty' />
+      </figure>
+      <aside className='CharactersPage__filters'>
         <FiltersPanel
           value={filters}
           onChange={setFilters}
           disabled={isLoading}
         />
-      </div>
+      </aside>
 
-      <div
+      <section
         className={classNames('CharactersPage__content', {
           CharactersPage__content_empty: isEmpty
         })}
       >
         {content}
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };

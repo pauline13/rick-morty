@@ -13,14 +13,15 @@ export const CharactersList = ({
   updateCharacter
 }: CharactersListProps) => {
   return (
-    <div className='CharactersList'>
+    <ul className='CharactersList'>
       {characters.map((character) => (
-        <CharacterCard
-          key={character.id}
-          character={character}
-          updateCharacter={updateCharacter}
-        />
+        <li key={character.id}>
+          <CharacterCard
+            character={character}
+            updateCharacter={updateCharacter}
+          />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };

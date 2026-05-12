@@ -1,0 +1,17 @@
+.InfiniteScroll__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 0 15px 0;
+}
+
+.InfiniteScroll__errorText {
+  font-size: var(--font-size-l);
+  color: var(--text-secondary);
+}
+
+.InfiniteScroll__retryButton {
+  width: auto;
+  padding: 0 24px;
+}
