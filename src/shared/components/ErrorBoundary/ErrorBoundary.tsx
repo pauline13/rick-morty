@@ -29,14 +29,14 @@ export class ErrorBoundary extends Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div className='ErrorBoundary'>
+        <section className='ErrorBoundary'>
           <h1 className='ErrorBoundary__title'>Woops! Something went wrong</h1>
           <Button
             className='ErrorBoundary__button'
             text='Reload page'
             onClick={() => window.location.reload()}
           />
-        </div>
+        </section>
       );
     }
 

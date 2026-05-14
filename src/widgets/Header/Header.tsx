@@ -1,23 +1,21 @@
-import { useNavigate } from 'react-router';
+import { Link } from 'react-router';
 
 import { LogoIcon, SunIcon } from '@/shared/assets';
 import { Button } from '@/shared/components';
 import './Header.css';
 
 export const Header = () => {
-  const navigate = useNavigate();
-
   return (
     <header className='Header'>
-      <div className='Header__content'>
-        <div className='Header__logo' onClick={() => navigate('/')}>
+      <nav className='Header__content'>
+        <Link className='Header__logo' to='/'>
           <LogoIcon />
-        </div>
+        </Link>
         <div className='Header__actions'>
           <Button icon={<SunIcon />} />
           <Button text='РУ' />
         </div>
-      </div>
+      </nav>
     </header>
   );
 };

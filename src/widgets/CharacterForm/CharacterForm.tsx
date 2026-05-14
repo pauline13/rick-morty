@@ -18,7 +18,7 @@ export const CharacterForm = ({
   isEditing
 }: CharacterFormProps) => {
   return (
-    <div className='CharacterForm'>
+    <section className='CharacterForm'>
       <div className='CharacterForm__nameWrapper'>
         {isEditing ? (
           <Input
@@ -76,6 +76,6 @@ export const CharacterForm = ({
           renderSuffix={(option) => <StatusDot status={option.value} />}
         />
       </div>
-    </div>
+    </section>
   );
 };
