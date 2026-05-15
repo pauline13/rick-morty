@@ -9,13 +9,17 @@ import {
   SPECIES_OPTIONS,
   GENDER_OPTIONS
 } from '@/shared/constants';
-import { toFilterValue, withAllOption } from '@/shared/helpers';
+import { classNames, toFilterValue, withAllOption } from '@/shared/helpers';
+
 import './FiltersPanel.css';
 
 interface FiltersPanelProps {
+  nameValue: string;
+  onNameChange: (name: string) => void;
+  isNamePending?: boolean;
   value: CharactersFilters;
   onChange: (value: CharactersFilters) => void;
-  disabled?: boolean;
+  disabledSelects?: boolean;
 }
 
 const STATUS_FILTER_OPTIONS = withAllOption(STATUS_OPTIONS, ALL_FILTER_OPTION);
@@ -26,15 +30,29 @@ const SPECIES_FILTER_OPTIONS = withAllOption(
 const GENDER_FILTER_OPTIONS = withAllOption(GENDER_OPTIONS, ALL_FILTER_OPTION);
 
 export const FiltersPanel = memo(
-  ({ value, onChange, disabled }: FiltersPanelProps) => {
+  ({
+    nameValue,
+    onNameChange,
+    isNamePending,
+    value,
+    onChange,
+    disabledSelects
+  }: FiltersPanelProps) => {
+    const filtersWithCurrentName = (patch: Partial<CharactersFilters>) => ({
+      ...value,
+      ...patch,
+      name: nameValue
+    });
+
     return (
       <section className='FiltersPanel'>
         <Input
-          classNameWrapper='FiltersPanel__field'
+          classNameWrapper={classNames('FiltersPanel__field', {
+            FiltersPanel__field_pending: isNamePending
+          })}
           placeholder='Filter by name...'
-          value={value.name}
-          onChange={(name) => onChange({ ...value, name })}
-          disabled={disabled}
+          value={nameValue}
+          onChange={onNameChange}
           rightIcon={<SearchIcon />}
           clearIconSize='xl'
         />
@@ -44,12 +62,13 @@ export const FiltersPanel = memo(
           options={SPECIES_FILTER_OPTIONS}
           placeholder='Species'
           onChange={(species) =>
-            onChange({
-              ...value,
-              species: toFilterValue(species, SPECIES_OPTIONS)
-            })
+            onChange(
+              filtersWithCurrentName({
+                species: toFilterValue(species, SPECIES_OPTIONS)
+              })
+            )
           }
-          disabled={disabled}
+          disabled={disabledSelects}
         />
         <Select
           className='FiltersPanel__field'
@@ -57,12 +76,13 @@ export const FiltersPanel = memo(
           options={GENDER_FILTER_OPTIONS}
           placeholder='Gender'
           onChange={(gender) =>
-            onChange({
-              ...value,
-              gender: toFilterValue(gender, GENDER_OPTIONS)
-            })
+            onChange(
+              filtersWithCurrentName({
+                gender: toFilterValue(gender, GENDER_OPTIONS)
+              })
+            )
           }
-          disabled={disabled}
+          disabled={disabledSelects}
         />
         <Select
           className='FiltersPanel__field'
@@ -70,12 +90,13 @@ export const FiltersPanel = memo(
           options={STATUS_FILTER_OPTIONS}
           placeholder='Status'
           onChange={(status) =>
-            onChange({
-              ...value,
-              status: toFilterValue(status, STATUS_OPTIONS)
-            })
+            onChange(
+              filtersWithCurrentName({
+                status: toFilterValue(status, STATUS_OPTIONS)
+              })
+            )
           }
-          disabled={disabled}
+          disabled={disabledSelects}
         />
       </section>
     );

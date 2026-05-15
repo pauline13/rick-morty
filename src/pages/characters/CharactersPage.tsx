@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 
 import { useCharacters, type CharactersFilters } from '@/entities/character';
 import { logoXlImage } from '@/shared/assets';
@@ -10,13 +10,24 @@ import { CharactersList } from './components';
 
 import './CharactersPage.css';
 
+const INITIAL_FILTERS: CharactersFilters = {
+  name: '',
+  status: '',
+  species: '',
+  gender: ''
+};
+
 export const CharactersPage = () => {
-  const [filters, setFilters] = useState<CharactersFilters>({
-    name: '',
-    status: '',
-    species: '',
-    gender: ''
-  });
+  const [searchInput, setSearchInput] = useState('');
+  const [filters, setFilters] = useState<CharactersFilters>(INITIAL_FILTERS);
+  const [isPending, startTransition] = useTransition();
+
+  const handleNameChange = (name: string) => {
+    setSearchInput(name);
+    startTransition(() => {
+      setFilters((prev) => ({ ...prev, name }));
+    });
+  };
 
   const {
     characters,
@@ -68,9 +79,12 @@ export const CharactersPage = () => {
       </figure>
       <aside className='CharactersPage__filters'>
         <FiltersPanel
+          nameValue={searchInput}
+          onNameChange={handleNameChange}
+          isNamePending={isPending}
           value={filters}
           onChange={setFilters}
-          disabled={isLoading}
+          disabledSelects={isLoading}
         />
       </aside>
 
