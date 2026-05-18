@@ -10,13 +10,15 @@ import { CharactersList } from './components';
 
 import './CharactersPage.css';
 
+const INITIAL_FILTERS: CharactersFilters = {
+  name: '',
+  status: '',
+  species: '',
+  gender: ''
+};
+
 export const CharactersPage = () => {
-  const [filters, setFilters] = useState<CharactersFilters>({
-    name: '',
-    status: '',
-    species: '',
-    gender: ''
-  });
+  const [filters, setFilters] = useState<CharactersFilters>(INITIAL_FILTERS);
 
   const {
     characters,

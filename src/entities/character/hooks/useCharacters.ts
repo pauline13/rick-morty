@@ -111,7 +111,6 @@ export const useCharacters = (filters: CharactersFilters) => {
       controller.abort();
       clearTimeout(retryTimerRef.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, retryTrigger, debouncedName, filters.status, filters.species, filters.gender]);
 
   const retry = useCallback(() => {
