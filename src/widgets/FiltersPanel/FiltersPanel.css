@@ -8,8 +8,3 @@
   width: 100%;
   max-width: 238px;
 }
-
-.FiltersPanel__field_pending {
-  opacity: 0.5;
-  background-color: var(--status-orange);
-}
