@@ -10,11 +10,16 @@ import {
   GENDER_OPTIONS
 } from '@/shared/constants';
 import { toFilterValue, withAllOption } from '@/shared/helpers';
+import { useCharactersFiltersStore } from '@/store';
 import './FiltersPanel.css';
 
-interface FiltersPanelProps {
+interface FiltersPanelViewProps {
   value: CharactersFilters;
   onChange: (value: CharactersFilters) => void;
+  disabled?: boolean;
+}
+
+interface FiltersPanelProps {
   disabled?: boolean;
 }
 
@@ -25,8 +30,8 @@ const SPECIES_FILTER_OPTIONS = withAllOption(
 );
 const GENDER_FILTER_OPTIONS = withAllOption(GENDER_OPTIONS, ALL_FILTER_OPTION);
 
-export const FiltersPanel = memo(
-  ({ value, onChange, disabled }: FiltersPanelProps) => {
+const FiltersPanelView = memo(
+  ({ value, onChange, disabled }: FiltersPanelViewProps) => {
     return (
       <section className='FiltersPanel'>
         <Input
@@ -81,3 +86,16 @@ export const FiltersPanel = memo(
     );
   }
 );
+
+export const FiltersPanel = memo(({ disabled }: FiltersPanelProps) => {
+  const filters = useCharactersFiltersStore((state) => state.filters);
+  const setFilters = useCharactersFiltersStore((state) => state.setFilters);
+
+  return (
+    <FiltersPanelView
+      value={filters}
+      onChange={(next) => setFilters(next)}
+      disabled={disabled}
+    />
+  );
+});

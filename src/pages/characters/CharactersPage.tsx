@@ -1,24 +1,16 @@
-import { useState } from 'react';
-
-import { useCharacters, type CharactersFilters } from '@/entities/character';
+import { useCharacters } from '@/entities/character';
 import { logoXlImage } from '@/shared/assets';
 import { EmptyState, Loader, InfiniteScroll } from '@/shared/components';
 import { classNames } from '@/shared/helpers';
+import { useCharactersFiltersStore } from '@/store';
 import { FiltersPanel } from '@/widgets';
 
 import { CharactersList } from './components';
 
 import './CharactersPage.css';
 
-const INITIAL_FILTERS: CharactersFilters = {
-  name: '',
-  status: '',
-  species: '',
-  gender: ''
-};
-
 export const CharactersPage = () => {
-  const [filters, setFilters] = useState<CharactersFilters>(INITIAL_FILTERS);
+  const filters = useCharactersFiltersStore((state) => state.filters);
 
   const {
     characters,
@@ -69,11 +61,7 @@ export const CharactersPage = () => {
         <img src={logoXlImage} alt='Rick and Morty' />
       </figure>
       <aside className='CharactersPage__filters'>
-        <FiltersPanel
-          value={filters}
-          onChange={setFilters}
-          disabled={isLoading}
-        />
+        <FiltersPanel disabled={isLoading} />
       </aside>
 
       <section
