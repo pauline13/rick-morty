@@ -15,11 +15,11 @@ export const CharactersPage = () => {
   const {
     characters,
     isLoading,
-    isLoadingMore,
-    hasMore,
-    hasError,
-    loadMore,
-    retry,
+    isFetchingNextPage,
+    hasNextPage,
+    isError,
+    fetchNextPage,
+    refetch,
     updateCharacter
   } = useCharacters(filters);
 
@@ -30,13 +30,13 @@ export const CharactersPage = () => {
         characters={characters}
         updateCharacter={updateCharacter}
       />
-      {hasMore && (
+      {hasNextPage && (
         <InfiniteScroll
-          hasMore={hasMore}
-          isLoadingMore={isLoadingMore}
-          hasError={hasError}
-          onLoadMore={loadMore}
-          onRetry={retry}
+          hasMore={hasNextPage}
+          isLoadingMore={isFetchingNextPage}
+          hasError={isError}
+          onLoadMore={() => fetchNextPage()}
+          onRetry={() => refetch()}
           loader={<Loader className='CharactersPage__loader' size='sm' />}
         />
       )}

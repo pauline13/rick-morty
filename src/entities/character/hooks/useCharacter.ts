@@ -1,59 +1,57 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
+import { QUERY_RETRY_DELAY_MS } from '@/shared/constants';
 import {
   createErrorMessages,
+  getRequestErrorType,
   handleRequestError,
-  REQUEST_ERROR_TYPE
+  isRetryableRequestError,
+  REQUEST_ERROR_TYPE,
+  shouldRetryQuery
 } from '@/shared/helpers';
 
 import { getCharacter } from '../api';
-import type { Character } from '../model';
 
 const CHARACTER_ERROR_MESSAGES = createErrorMessages('character');
 
 export const useCharacter = (id: number) => {
   const navigate = useNavigate();
+  
+  const isValidId = Boolean(id) && !Number.isNaN(id);
 
-  const [character, setCharacter] = useState<Character | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const { data, isPending, isFetching, error, refetch } = useQuery({
+    queryKey: ['character', id],
+    queryFn: ({ signal }) => getCharacter(id, signal),
+    enabled: isValidId,
+    retry: (failureCount, queryError) => shouldRetryQuery(failureCount, queryError),
+    retryDelay: QUERY_RETRY_DELAY_MS
+  });
 
   useEffect(() => {
-    if (!id || Number.isNaN(id)) return;
+    if (!error) return;
 
-    const controller = new AbortController();
+    const errorType = getRequestErrorType(error);
 
-    const fetchCharacter = async () => {
-      try {
-        setIsLoading(true);
+    if (errorType === REQUEST_ERROR_TYPE.NOT_FOUND) {
+      navigate('/not-found', { replace: true });
+      return;
+    }
 
-        const data = await getCharacter(id, controller.signal);
-        setCharacter(data);
-      } catch (error: unknown) {
-        const errorType = handleRequestError(error, CHARACTER_ERROR_MESSAGES);
+    if (!isFetching) {
+      handleRequestError(error, CHARACTER_ERROR_MESSAGES);
+    }
+  }, [error, isFetching, navigate]);
 
-        if (errorType === REQUEST_ERROR_TYPE.CANCELED) return;
+  const isLoading = isPending || isFetching;
 
-        if (errorType === REQUEST_ERROR_TYPE.NOT_FOUND) {
-          navigate('/not-found', { replace: true });
-          return;
-        }
-
-        setCharacter(null);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchCharacter();
-
-    return () => {
-      controller.abort();
-    };
-  }, [id, navigate]);
+  const showRetryError = Boolean(error && !isLoading && !data && isRetryableRequestError(error));
 
   return {
-    character,
-    isLoading
+    character: data ?? null,
+    isLoading,
+    showRetryError,
+    refetch
   };
 };

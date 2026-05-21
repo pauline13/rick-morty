@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router';
 
 import { useCharacter, type Character } from '@/entities/character/';
 import { formatFieldValue } from '@/pages/character-info/lib';
-import { ButtonBack, Loader } from '@/shared/components';
+import { Button, ButtonBack, Loader } from '@/shared/components';
 
 import './CharacterInfoPage.css';
 
@@ -18,7 +18,9 @@ const CHARACTER_FIELDS: { key: keyof Character; label: string }[] = [
 export const CharacterInfoPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { character, isLoading } = useCharacter(Number(id));
+  const { character, isLoading, showRetryError, refetch } = useCharacter(
+    Number(id)
+  );
 
   return (
     <section className='CharacterInfoPage'>
@@ -29,6 +31,17 @@ export const CharacterInfoPage = () => {
       {isLoading && (
         <div className='CharacterInfoPage__loader'>
           <Loader size='xl' text='Loading character card...' />
+        </div>
+      )}
+
+      {showRetryError && (
+        <div className='CharacterInfoPage__error'>
+          <p className='CharacterInfoPage__errorText'>Character loading failed</p>
+          <Button
+            text='Retry'
+            onClick={() => refetch()}
+            className='CharacterInfoPage__retryButton'
+          />
         </div>
       )}
 

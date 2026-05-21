@@ -1,10 +1,10 @@
-import { apiInstance } from '@/shared/api';
 import { API_ROUTES } from '@/shared/constants';
 import { normalizeStatus } from '@/shared/helpers';
+import { apiInstance } from '@/shared/lib';
 
 import type { Character, CharactersFilters } from '../model';
 
-type CharactersResponse = {
+export  type CharactersResponse = {
   info: {
     next: string | null;
   };
