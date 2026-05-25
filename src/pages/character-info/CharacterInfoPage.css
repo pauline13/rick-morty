@@ -10,6 +10,23 @@
   justify-content: center;
 }
 
+.CharacterInfoPage__error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.CharacterInfoPage__errorText {
+  font-size: var(--font-size-l);
+ }
+
+.CharacterInfoPage__retryButton {
+  width: auto;
+  padding: 0 24px;
+}
+
 .CharacterInfoPage__container {
   display: flex;
   flex-direction: column;
