@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 import { QUERY_RETRY_DELAY_MS } from '@/shared/constants';
@@ -21,7 +21,7 @@ export const useCharacter = (id: number) => {
   
   const isValidId = Boolean(id) && !Number.isNaN(id);
 
-  const { data, isPending, isFetching, error, refetch } = useQuery({
+  const { data, isPending, isFetching, error, refetch: refetchQuery } = useQuery({
     queryKey: ['character', id],
     queryFn: ({ signal }) => getCharacter(id, signal),
     enabled: isValidId,
@@ -43,6 +43,8 @@ export const useCharacter = (id: number) => {
       handleRequestError(error, CHARACTER_ERROR_MESSAGES);
     }
   }, [error, isFetching, navigate]);
+
+  const refetch = useCallback(() => { refetchQuery(); }, [refetchQuery]);
 
   const isLoading = isPending || isFetching;
 

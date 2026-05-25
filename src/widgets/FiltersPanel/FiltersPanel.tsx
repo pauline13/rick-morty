@@ -1,6 +1,7 @@
 import { memo } from 'react';
 
 import { useCharactersFiltersStore } from '@/store';
+
 import { FiltersPanelView } from './FiltersPanelView';
 
 import './FiltersPanel.css';

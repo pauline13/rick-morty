@@ -19,9 +19,12 @@
 - **React 19** + **TypeScript**
 - **Vite 7** — сборка и dev-сервер
 - **React Router 7** — клиентская маршрутизация
+- **TanStack React Query 5** — серверное состояние, кэш, пагинация и запросы к API
+- **Zustand** — клиентское состояние фильтров списка
 - **Axios** — HTTP-клиент
 - **react-hot-toast** — toast-уведомления об ошибках
 - **Sass (SCSS)** — стили
+- **Vitest** + **Testing Library** + **jsdom** — unit- и component-тесты
 - **ESLint** + **Stylelint** + **Prettier** — линтинг и форматирование
 - **vite-plugin-svgr** + **vite-plugin-image-optimizer** — оптимизация ассетов
 - **vite-bundle-analyzer** — анализ бандла
@@ -38,6 +41,7 @@ src/
 ├── pages/       # страницы (CharactersPage, CharacterInfoPage, NotFoundPage)
 ├── widgets/     # самостоятельные UI-блоки (Header, Footer, CharacterCard, FiltersPanel)
 ├── entities/    # бизнес-сущности (character: api, model, hooks)
+├── store/       # клиентское состояние (фильтры персонажей, Zustand)
 └── shared/      # переиспользуемое: api, components, hooks, helpers, constants, assets, types
 ```
 
@@ -70,16 +74,33 @@ npm run prettier          # форматирование проекта чере
 
 ---
 
+## 🧪 Тесты
+
+Стек: **Vitest**, **Testing Library**, окружение **jsdom** (`@testing-library/jest-dom` подключается в `vitest.setup.ts`).
+
+```bash
+npm run test              # однократный прогон тестов (Vitest)
+npm run test:watch        # тесты в watch-режиме
+npm run test:coverage     # прогон с отчётом покрытия (v8)
+```
+
+Отчёт `test:coverage` выводится в консоль (`text`) и сохраняется в HTML в каталог `coverage/`.
+
+---
+
 ## ✨ Функционал
 
-- Список персонажей с загрузкой данных из API
-- Фильтрация по **имени**, **статусу**, **виду** и **полу**
+- Список персонажей: загрузка и пагинация через **TanStack React Query** (`useInfiniteQuery`)
+- Фильтрация по **имени**, **статусу**, **виду** и **полу**; состояние фильтров в **Zustand**
 - Debounce поискового запроса по имени
-- Бесконечная прокрутка списка через `IntersectionObserver`
-- Автоматический retry запроса при сетевых, серверных и rate-limit ошибках
-- Переход на детальную страницу персонажа
-- Визуальное редактирование данных персонажа прямо в карточке (без сохранения в API)
+- Бесконечная прокрутка: `IntersectionObserver` + `fetchNextPage` из React Query
+- Retry запросов: глобальные настройки `QueryClient` и выборочный retry для детальной страницы (сетевые, серверные и rate-limit ошибки)
+- Детальная страница персонажа через `useQuery`; при 404 — редирект на страницу «не найдено»
+- Локальное редактирование карточки без сохранения в API — обновление кэша React Query (`setQueryData`)
 - Обработка ошибок через toast-уведомления (`react-hot-toast`)
 - `ErrorBoundary` на верхнем уровне с возможностью перезагрузить страницу
 - Страница 404 для несуществующих роутов
-- Отмена устаревших запросов через `AbortController`
+- Отмена устаревших запросов: `AbortSignal` в `queryFn`, управляется React Query при смене параметров и размонтировании
+- **React Query Devtools** в режиме разработки
+
+---

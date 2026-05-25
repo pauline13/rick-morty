@@ -49,21 +49,15 @@ export const useCharacters = (filters: CharactersFilters) => {
     isError,
     error,
     fetchNextPage,
-    refetch
+    refetch: refetchQuery
   } = useInfiniteQuery({
     queryKey,
     initialPageParam: 1,
-    queryFn: async ({ pageParam, signal }) => {
-      try {
-        return await getCharacters(
-          {
-            ...filters,
-            name: debouncedName,
-            page: pageParam
-          },
-          signal
-        );
-      } catch (requestError: unknown) {
+    queryFn: ({ pageParam, signal }) =>
+      getCharacters(
+        { ...filters, name: debouncedName, page: pageParam },
+        signal
+      ).catch((requestError: unknown) => {
         if (
           getRequestErrorType(requestError) === REQUEST_ERROR_TYPE.NOT_FOUND
         ) {
@@ -71,8 +65,7 @@ export const useCharacters = (filters: CharactersFilters) => {
         }
 
         throw requestError;
-      }
-    },
+      }),
     getNextPageParam: (lastPage, _allPages, lastPageParam) =>
       lastPage.info.next ? lastPageParam + 1 : undefined
   });
@@ -82,6 +75,8 @@ export const useCharacters = (filters: CharactersFilters) => {
       handleRequestError(error, CHARACTERS_ERROR_MESSAGES);
     }
   }, [isError, isFetching, error]);
+
+  const refetch = useCallback(() => { refetchQuery(); }, [refetchQuery]);
 
   const characters = useMemo(
     () => data?.pages.flatMap((page) => page.results) ?? [],

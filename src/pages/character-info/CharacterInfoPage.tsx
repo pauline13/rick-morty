@@ -39,7 +39,7 @@ export const CharacterInfoPage = () => {
           <p className='CharacterInfoPage__errorText'>Character loading failed</p>
           <Button
             text='Retry'
-            onClick={() => refetch()}
+            onClick={refetch}
             className='CharacterInfoPage__retryButton'
           />
         </div>
