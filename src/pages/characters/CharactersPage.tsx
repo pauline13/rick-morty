@@ -36,7 +36,7 @@ export const CharactersPage = () => {
           isLoadingMore={isFetchingNextPage}
           hasError={isError}
           onLoadMore={() => fetchNextPage()}
-          onRetry={() => refetch()}
+          onRetry={refetch}
           loader={<Loader className='CharactersPage__loader' size='sm' />}
         />
       )}
