@@ -25,6 +25,7 @@
 - **react-hot-toast** — toast-уведомления об ошибках
 - **Sass (SCSS)** — стили
 - **Vitest** + **Testing Library** + **jsdom** — unit- и component-тесты
+- **Playwright** — e2e-тесты в браузере
 - **ESLint** + **Stylelint** + **Prettier** — линтинг и форматирование
 - **vite-plugin-svgr** + **vite-plugin-image-optimizer** — оптимизация ассетов
 - **vite-bundle-analyzer** — анализ бандла
@@ -76,6 +77,8 @@ npm run prettier          # форматирование проекта чере
 
 ## 🧪 Тесты
 
+### Unit и component (Vitest)
+
 Стек: **Vitest**, **Testing Library**, окружение **jsdom** (`@testing-library/jest-dom` подключается в `vitest.setup.ts`).
 
 ```bash
@@ -85,6 +88,23 @@ npm run test:coverage     # прогон с отчётом покрытия (v8)
 ```
 
 Отчёт `test:coverage` выводится в консоль (`text`) и сохраняется в HTML в каталог `coverage/`.
+
+### E2E (Playwright)
+
+Сценарии в `tests/e2e/`. Ответы API мокируются через `page.route`, dev-сервер поднимается автоматически (`webServer` в `playwright.config.ts`). Проект: **Chromium**.
+
+Перед первым запуском необходимо установить браузер:
+
+```bash
+npx playwright install chromium
+```
+
+```bash
+npm run test:e2e          # прогон e2e-тестов (Playwright)
+npm run test:e2e:ui       # интерактивный UI-режим Playwright
+```
+
+HTML-отчёт сохраняется в `playwright-report/` (артефакты прогона — в `test-results/`).
 
 ---
 

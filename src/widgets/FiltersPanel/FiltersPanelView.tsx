@@ -36,6 +36,7 @@ export const FiltersPanelView = memo(
           disabled={disabled}
           rightIcon={<SearchIcon />}
           clearIconSize='xl'
+          testId='filter-name-input'
         />
         <Select
           className='FiltersPanel__field'

@@ -27,6 +27,10 @@ dist-ssr
 # Test coverage
 coverage
 
+# Playwright reports
+playwright-report
+test-results
+
 # Cursor
 .cursor/*
 skills-lock.json
