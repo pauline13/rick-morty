@@ -13,7 +13,7 @@ export const CharactersList = ({
   updateCharacter
 }: CharactersListProps) => {
   return (
-    <ul className='CharactersList'>
+    <ul className='CharactersList' data-testid='characters-list'>
       {characters.map((character) => (
         <li key={character.id}>
           <CharacterCard

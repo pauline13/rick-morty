@@ -19,6 +19,7 @@ interface InputProps {
   readOnly?: boolean;
   classNameWrapper?: string;
   classNameInput?: string;
+  testId?: string;
 }
 
 export const Input = ({
@@ -33,7 +34,8 @@ export const Input = ({
   variant = 'outline',
   readOnly = false,
   classNameWrapper,
-  classNameInput
+  classNameInput,
+  testId
 }: InputProps) => {
   const handleChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
@@ -65,6 +67,7 @@ export const Input = ({
         readOnly={readOnly}
         disabled={disabled}
         onChange={handleChangeValue}
+        data-testid={testId}
       />
       {!readOnly && value !== '' && showClear && (
         <ButtonIcon type='button' size={clearIconSize} onClick={handleClear}>
