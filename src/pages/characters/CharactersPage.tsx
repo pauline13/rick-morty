@@ -2,7 +2,7 @@ import { useCharacters } from '@/entities/character';
 import { logoXlImage } from '@/shared/assets';
 import { EmptyState, Loader, InfiniteScroll } from '@/shared/components';
 import { classNames } from '@/shared/helpers';
-import { useCharactersFiltersStore } from '@/store';
+import { useCharactersFiltersStore } from '@/stores';
 import { FiltersPanel } from '@/widgets';
 
 import { CharactersList } from './components';

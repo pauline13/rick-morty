@@ -37,6 +37,7 @@
 }
 
 .Loader__text {
+  color: var(--text-primary);
   font-family: var(--font-secondary);
   font-size: var(--font-size-xl);
 }

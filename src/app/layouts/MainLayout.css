@@ -3,6 +3,7 @@
   height: 100%;
   flex-direction: column;
   display: flex;
+  background-color: var(--background-body);
 }
 
 .MainLayout__content {
@@ -11,4 +12,14 @@
   padding: 1.5rem 0;
   align-self: center;
   max-width: 1040px;
+}
+
+.MainLayout__header,
+.MainLayout__footer {
+  z-index: 1;
+}
+
+.MainLayout__toast {
+  background: var(--background-body) !important;
+  color: var(--text-primary) !important;
 }

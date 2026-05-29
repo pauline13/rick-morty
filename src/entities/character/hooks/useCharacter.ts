@@ -18,14 +18,21 @@ const CHARACTER_ERROR_MESSAGES = createErrorMessages('character');
 
 export const useCharacter = (id: number) => {
   const navigate = useNavigate();
-  
+
   const isValidId = Boolean(id) && !Number.isNaN(id);
 
-  const { data, isPending, isFetching, error, refetch: refetchQuery } = useQuery({
+  const {
+    data,
+    isPending,
+    isFetching,
+    error,
+    refetch: refetchQuery
+  } = useQuery({
     queryKey: ['character', id],
     queryFn: ({ signal }) => getCharacter(id, signal),
     enabled: isValidId,
-    retry: (failureCount, queryError) => shouldRetryQuery(failureCount, queryError),
+    retry: (failureCount, queryError) =>
+      shouldRetryQuery(failureCount, queryError),
     retryDelay: QUERY_RETRY_DELAY_MS
   });
 
@@ -44,11 +51,15 @@ export const useCharacter = (id: number) => {
     }
   }, [error, isFetching, navigate]);
 
-  const refetch = useCallback(() => { refetchQuery(); }, [refetchQuery]);
+  const refetch = useCallback(() => {
+    refetchQuery();
+  }, [refetchQuery]);
 
   const isLoading = isPending || isFetching;
 
-  const showRetryError = Boolean(error && !isLoading && !data && isRetryableRequestError(error));
+  const showRetryError = Boolean(
+    error && !isLoading && !data && isRetryableRequestError(error)
+  );
 
   return {
     character: data ?? null,

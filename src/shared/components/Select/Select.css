@@ -40,12 +40,14 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  color: var(--text-secondary);
 }
 
 .Select__icon {
   display: flex;
   align-items: center;
   transition: transform 0.2s ease;
+  color: var(--text-primary);
 }
 
 .Select__icon_xl {
@@ -70,7 +72,7 @@
   z-index: 10;
   padding: 1px;
   color: var(--text-secondary);
-  background: var(--background-default);
+  background: var(--background-body);
   border: 1px solid var(--border-grey);
   border-radius: var(--border-radius);
 }

@@ -54,7 +54,7 @@ export const Input = ({
         classNameWrapper
       )}
     >
-      {rightIcon && <div>{rightIcon}</div>}
+      {rightIcon && <div className='Input__icon'>{rightIcon}</div>}
       <input
         className={classNames(
           'Input__field',

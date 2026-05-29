@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { useCharactersFiltersStore } from '@/store';
+import { useCharactersFiltersStore } from '@/stores';
 
 import { FiltersPanelView } from './FiltersPanelView';
 

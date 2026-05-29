@@ -3,6 +3,7 @@
   align-items: center;
   cursor: pointer;
   user-select: none;
+  color: var(--text-primary);
 }
 
 .ButtonIcon_xl {

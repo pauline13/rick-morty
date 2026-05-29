@@ -7,13 +7,19 @@ import './MainLayout.css';
 export const MainLayout = () => {
   return (
     <div className='MainLayout'>
-      <Header />
+      <div className='MainLayout__header'>
+        <Header />
+      </div>
       <main className='MainLayout__content'>
         <Outlet />
       </main>
-      <Footer />
-
-      <Toaster position='bottom-right' />
+      <div className='MainLayout__footer'>
+        <Footer />
+      </div>
+      <Toaster
+        position='bottom-right'
+        toastOptions={{ className: 'MainLayout__toast' }}
+      />
     </div>
   );
 };
