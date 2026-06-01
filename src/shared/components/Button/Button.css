@@ -8,7 +8,8 @@
   font-size: var(--font-size-m);
   border: 1px solid var(--border-black);
   border-radius: var(--border-radius-m);
-  background-color: var(--background-default);
+  background-color: var(--background-button);
+  color: var(--text-secondary);
   cursor: pointer;
   font-family: inherit;
 }
@@ -25,6 +26,7 @@
 
 .Button__icon {
   display: inline-flex;
+  color: var(--text-secondary);
 }
 
 .Button__text {

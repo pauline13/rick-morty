@@ -62,7 +62,11 @@ export const InfiniteScroll = ({
       return (
         <div className='InfiniteScroll__error'>
           <p className='InfiniteScroll__errorText'>Loading failed</p>
-          <Button text='Retry' onClick={onRetry} className='InfiniteScroll__retryButton' />
+          <Button
+            text='Retry'
+            onClick={onRetry}
+            className='InfiniteScroll__retryButton'
+          />
         </div>
       );
     }

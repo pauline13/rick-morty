@@ -14,8 +14,7 @@
 }
 
 .Header__logo {
-  font-size: var(--font-size-xl);
-  font-weight: bold;
+  color: var(--text-primary);
 }
 
 .Header__logo:hover {

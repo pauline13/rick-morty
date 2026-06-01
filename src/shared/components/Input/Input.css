@@ -20,6 +20,10 @@
   border-bottom: 1px solid var(--border-black);
 }
 
+.Input__icon {
+  color: var(--text-secondary);
+}
+
 .Input__field {
   all: unset;
   white-space: nowrap;

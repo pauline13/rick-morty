@@ -20,7 +20,7 @@
 
 .CharacterInfoPage__errorText {
   font-size: var(--font-size-l);
- }
+}
 
 .CharacterInfoPage__retryButton {
   width: auto;
@@ -41,6 +41,7 @@
 }
 
 .CharacterInfoPage__name {
+  color: var(--text-primary);
   font-size: var(--font-size-header-xl);
   margin: 16px 0 42px;
 }
@@ -68,6 +69,7 @@
 }
 
 .CharacterInfoPage__fieldLabel {
+  color: var(--text-primary);
   font-weight: 700;
 }
 
