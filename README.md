@@ -20,7 +20,8 @@
 - **Vite 7** — сборка и dev-сервер
 - **React Router 7** — клиентская маршрутизация
 - **TanStack React Query 5** — серверное состояние, кэш, пагинация и запросы к API
-- **Zustand** — клиентское состояние фильтров списка
+- **Zustand** — клиентское состояние (фильтры списка, тема оформления)
+- **i18next** — интернационализация UI
 - **Axios** — HTTP-клиент
 - **react-hot-toast** — toast-уведомления об ошибках
 - **Sass (SCSS)** — стили
@@ -40,9 +41,9 @@
 src/
 ├── app/         # инициализация: точка входа, провайдеры, роутинг, layout
 ├── pages/       # страницы (CharactersPage, CharacterInfoPage, NotFoundPage)
-├── widgets/     # самостоятельные UI-блоки (Header, Footer, CharacterCard, FiltersPanel)
+├── widgets/     # UI-блоки (Header, Footer, FiltersPanel, LanguageSwitcher, ThemeSwitcher)
 ├── entities/    # бизнес-сущности (character: api, model, hooks)
-├── store/       # клиентское состояние (фильтры персонажей, Zustand)
+├── stores/      # клиентское состояние: фильтры персонажей, тема
 └── shared/      # переиспользуемое: api, components, hooks, helpers, constants, assets, types
 ```
 
@@ -121,6 +122,8 @@ HTML-отчёт сохраняется в `playwright-report/` (артефакт
 - `ErrorBoundary` на верхнем уровне с возможностью перезагрузить страницу
 - Страница 404 для несуществующих роутов
 - Отмена устаревших запросов: `AbortSignal` в `queryFn`, управляется React Query при смене параметров и размонтировании
+- Локализация интерфейса (**i18next**): языки **en** и **ru**, выбор сохраняется между сессиями; при первом заходе — определение языка из настроек браузера. Переводится UI; данные с API (имена персонажей и т.п.) не локализуются
+- Светлая и тёмная тема (**light** / **dark**): переключение сохраняется; при первом заходе — по системной настройке `prefers-color-scheme`
 - **React Query Devtools** в режиме разработки
 
 ---

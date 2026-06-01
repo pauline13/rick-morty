@@ -76,7 +76,9 @@ export const useCharacters = (filters: CharactersFilters) => {
     }
   }, [isError, isFetching, error]);
 
-  const refetch = useCallback(() => { refetchQuery(); }, [refetchQuery]);
+  const refetch = useCallback(() => {
+    refetchQuery();
+  }, [refetchQuery]);
 
   const characters = useMemo(
     () => data?.pages.flatMap((page) => page.results) ?? [],

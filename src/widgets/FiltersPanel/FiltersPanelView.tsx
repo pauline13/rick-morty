@@ -1,8 +1,10 @@
+import type { ParseKeys } from 'i18next';
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { CharactersFilters } from '@/entities/character';
 import { SearchIcon } from '@/shared/assets';
-import { Input, Select } from '@/shared/components';
+import { Input, Select, type Option } from '@/shared/components';
 import {
   STATUS_OPTIONS,
   ALL_FILTER_OPTION,
@@ -26,11 +28,19 @@ const GENDER_FILTER_OPTIONS = withAllOption(GENDER_OPTIONS, ALL_FILTER_OPTION);
 
 export const FiltersPanelView = memo(
   ({ value, onChange, disabled }: FiltersPanelViewProps) => {
+    const { t } = useTranslation();
+
+    const translateOptions = <T extends string>(options: Option<T>[]) =>
+      options.map((o) => ({
+        ...o,
+        label: t(`filters.options.${o.value}` as ParseKeys)
+      }));
+
     return (
       <section className='FiltersPanel'>
         <Input
           classNameWrapper='FiltersPanel__field'
-          placeholder='Filter by name...'
+          placeholder={t('filters.placeholder.name')}
           value={value.name}
           onChange={(name) => onChange({ ...value, name })}
           disabled={disabled}
@@ -41,8 +51,8 @@ export const FiltersPanelView = memo(
         <Select
           className='FiltersPanel__field'
           value={value.species}
-          options={SPECIES_FILTER_OPTIONS}
-          placeholder='Species'
+          options={translateOptions(SPECIES_FILTER_OPTIONS)}
+          placeholder={t('filters.placeholder.species')}
           onChange={(species) =>
             onChange({
               ...value,
@@ -54,8 +64,8 @@ export const FiltersPanelView = memo(
         <Select
           className='FiltersPanel__field'
           value={value.gender}
-          options={GENDER_FILTER_OPTIONS}
-          placeholder='Gender'
+          options={translateOptions(GENDER_FILTER_OPTIONS)}
+          placeholder={t('filters.placeholder.gender')}
           onChange={(gender) =>
             onChange({
               ...value,
@@ -67,8 +77,8 @@ export const FiltersPanelView = memo(
         <Select
           className='FiltersPanel__field'
           value={value.status}
-          options={STATUS_FILTER_OPTIONS}
-          placeholder='Status'
+          options={translateOptions(STATUS_FILTER_OPTIONS)}
+          placeholder={t('filters.placeholder.status')}
           onChange={(status) =>
             onChange({
               ...value,

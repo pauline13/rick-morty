@@ -1,5 +1,8 @@
 import axios from 'axios';
+import type { ParseKeys } from 'i18next';
 import { toast } from 'react-hot-toast';
+
+import { i18n } from '@/shared/i18n';
 
 export const REQUEST_ERROR_TYPE = {
   CANCELED: 'canceled',
@@ -13,13 +16,18 @@ export const REQUEST_ERROR_TYPE = {
 export type RequestErrorType =
   (typeof REQUEST_ERROR_TYPE)[keyof typeof REQUEST_ERROR_TYPE];
 
-export const DEFAULT_REQUEST_ERROR_MESSAGES: Partial<
-  Record<RequestErrorType, string>
-> = {
-  [REQUEST_ERROR_TYPE.NETWORK]: 'Check your internet connection',
-  [REQUEST_ERROR_TYPE.SERVER]: 'Server error. Please try again later',
-  [REQUEST_ERROR_TYPE.RATE_LIMITED]: 'Too many requests. Please wait a moment',
-  [REQUEST_ERROR_TYPE.UNKNOWN]: 'Something went wrong. Please try again'
+const getDefaultErrorMessage = (
+  type: RequestErrorType
+): string | undefined => {
+  const keyMap: Partial<Record<RequestErrorType, string>> = {
+    [REQUEST_ERROR_TYPE.NETWORK]: 'common.errors.default.network',
+    [REQUEST_ERROR_TYPE.SERVER]: 'common.errors.default.server',
+    [REQUEST_ERROR_TYPE.RATE_LIMITED]: 'common.errors.default.rateLimited',
+    [REQUEST_ERROR_TYPE.UNKNOWN]: 'common.errors.default.unknown'
+  };
+
+  const key = keyMap[type];
+  return key ? i18n.t(key as ParseKeys) : undefined;
 };
 
 export const getRequestErrorType = (error: unknown): RequestErrorType => {
@@ -69,7 +77,7 @@ export const handleRequestError = (
   }
 
   const message =
-    messages?.[errorType] ?? DEFAULT_REQUEST_ERROR_MESSAGES[errorType];
+    messages?.[errorType] ?? getDefaultErrorMessage(errorType);
 
   if (message) {
     toast.error(message);
