@@ -1,16 +1,21 @@
+import { useTranslation } from 'react-i18next';
+
 import { ArrowBackIcon } from '@/shared/assets';
 import './ButtonBack.css';
 
 interface ButtonBackProps {
-  text?: string;
   onClick?: () => void;
 }
 
-export const ButtonBack = ({ text = 'GO BACK', onClick }: ButtonBackProps) => {
+export const ButtonBack = ({ onClick }: ButtonBackProps) => {
+  const { t } = useTranslation();
+
   return (
     <button className='ButtonBack' onClick={onClick}>
       <ArrowBackIcon />
-      {text && <span className='ButtonBack__text'>{text}</span>}
+      <span className='ButtonBack__text'>
+        {t('common.goBack').toUpperCase()}
+      </span>
     </button>
   );
 };

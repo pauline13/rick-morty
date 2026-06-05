@@ -1,0 +1,25 @@
+.CharacterFields {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  gap: 16px;
+}
+
+.CharacterFields__field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  border-bottom: 1px solid var(--border-light-grey);
+  padding-bottom: 14px;
+}
+
+.CharacterFields__label {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.CharacterFields__value {
+  font-size: var(--font-size-m);
+  font-weight: 400;
+  color: var(--text-secondary);
+}

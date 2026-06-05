@@ -1,7 +1,9 @@
+import type { ParseKeys } from 'i18next';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
 import type { Character } from '@/entities/character';
-import { Input, Select, StatusDot } from '@/shared/components';
+import { Input, Select, StatusDot, type Option } from '@/shared/components';
 import { STATUS_OPTIONS } from '@/shared/constants';
 
 import './CharacterForm.css';
@@ -17,6 +19,18 @@ export const CharacterForm = ({
   onChange,
   isEditing
 }: CharacterFormProps) => {
+  const { t } = useTranslation();
+
+  const translateOption = <T extends string>(option: Option<T>) => ({
+    ...option,
+    label: t(`filters.options.${option.value}` as ParseKeys)
+  });
+
+  const translateValue = (val: string) =>
+    t(`filters.options.${val.toLowerCase()}` as ParseKeys, {
+      defaultValue: val
+    });
+
   return (
     <section className='CharacterForm'>
       <div className='CharacterForm__nameWrapper'>
@@ -38,17 +52,17 @@ export const CharacterForm = ({
         )}
       </div>
       <div className='CharacterForm__field'>
-        <p className='CharacterForm__label'>Gender</p>
-        <p className='CharacterForm__value'>{value.gender}</p>
+        <p className='CharacterForm__label'>{t('characters.info.fields.gender')}</p>
+        <p className='CharacterForm__value'>{translateValue(value.gender)}</p>
       </div>
       <div className='CharacterForm__field'>
-        <p className='CharacterForm__label'>Species</p>
-        <p className='CharacterForm__value'>{value.species}</p>
+        <p className='CharacterForm__label'>{t('characters.info.fields.species')}</p>
+        <p className='CharacterForm__value'>{translateValue(value.species)}</p>
       </div>
       <div className='CharacterForm__field'>
-        <p className='CharacterForm__label'>Location</p>
+        <p className='CharacterForm__label'>{t('characters.info.fields.location')}</p>
         <Input
-          placeholder='Location'
+          placeholder={t('characters.info.fields.location')}
           value={value.location.name}
           readOnly={!isEditing}
           variant='underline'
@@ -65,13 +79,13 @@ export const CharacterForm = ({
         />
       </div>
       <div className='CharacterForm__field'>
-        <p className='CharacterForm__label'>Status</p>
+        <p className='CharacterForm__label'>{t('characters.info.fields.status')}</p>
         <Select
-          options={STATUS_OPTIONS}
+          options={STATUS_OPTIONS.map(translateOption)}
           value={value.status}
           readOnly={!isEditing}
           size='sm'
-          placeholder='Status'
+          placeholder={t('filters.placeholder.status')}
           onChange={(status) => onChange({ ...value, status })}
           renderSuffix={(option) => <StatusDot status={option.value} />}
         />

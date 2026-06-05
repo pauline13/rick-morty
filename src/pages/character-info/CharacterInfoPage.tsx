@@ -1,21 +1,15 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router';
 
-import { useCharacter, type Character } from '@/entities/character/';
-import { formatFieldValue } from '@/pages/character-info/lib';
+import { useCharacter } from '@/entities/character/';
 import { Button, ButtonBack, Loader } from '@/shared/components';
+
+import { CharacterFields } from './components';
 
 import './CharacterInfoPage.css';
 
-const CHARACTER_FIELDS: { key: keyof Character; label: string }[] = [
-  { key: 'gender', label: 'Gender' },
-  { key: 'status', label: 'Status' },
-  { key: 'species', label: 'Specie' },
-  { key: 'origin', label: 'Origin' },
-  { key: 'type', label: 'Type' },
-  { key: 'location', label: 'Location' }
-];
-
 export const CharacterInfoPage = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const { character, isLoading, showRetryError, refetch } = useCharacter(
@@ -30,15 +24,17 @@ export const CharacterInfoPage = () => {
 
       {isLoading && (
         <div className='CharacterInfoPage__loader'>
-          <Loader size='xl' text='Loading character card...' />
+          <Loader size='xl' text={t('characters.info.loading')} />
         </div>
       )}
 
       {showRetryError && (
         <div className='CharacterInfoPage__error'>
-          <p className='CharacterInfoPage__errorText'>Character loading failed</p>
+          <p className='CharacterInfoPage__errorText'>
+            {t('characters.info.loadingFailed')}
+          </p>
           <Button
-            text='Retry'
+            text={t('common.retry')}
             onClick={refetch}
             className='CharacterInfoPage__retryButton'
           />
@@ -53,17 +49,10 @@ export const CharacterInfoPage = () => {
             alt={character.name}
           />
           <h1 className='CharacterInfoPage__name'>{character.name}</h1>
-          <h2 className='CharacterInfoPage__infoTitle'>Information</h2>
-          <dl className='CharacterInfoPage__fields'>
-            {CHARACTER_FIELDS.map((field) => (
-              <div className='CharacterInfoPage__field' key={field.key}>
-                <dt className='CharacterInfoPage__fieldLabel'>{field.label}</dt>
-                <dd className='CharacterInfoPage__fieldValue'>
-                  {formatFieldValue(character[field.key])}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <h2 className='CharacterInfoPage__infoTitle'>
+            {t('characters.info.title')}
+          </h2>
+          <CharacterFields character={character} />
         </div>
       )}
     </section>

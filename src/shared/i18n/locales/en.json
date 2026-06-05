@@ -1,0 +1,78 @@
+{
+  "common": {
+    "retry": "Retry",
+    "goBack": "Go back",
+    "loadingFailed": "Loading failed",
+    "errors": {
+      "default": {
+        "network": "Check your internet connection",
+        "server": "Server error. Please try again later",
+        "rateLimited": "Too many requests. Please wait a moment",
+        "unknown": "Something went wrong. Please try again"
+      },
+      "entity": {
+        "unknown": "Failed to load {{entity}}",
+        "network": "Failed to load {{entity}}. Check your internet connection",
+        "server": "Failed to load {{entity}}. Please try again later",
+        "rateLimited": "Too many requests while loading {{entity}}. Please wait and try again"
+      },
+      "entityNames": {
+        "character": "character",
+        "characters": "characters"
+      }
+    }
+  },
+  "layout": {
+    "languageLabel": "en",
+    "footer": {
+      "madeBy": "Made with love by pauliedev"
+    }
+  },
+  "characters": {
+    "list": {
+      "loading": "Loading characters...",
+      "empty": "Characters list is empty..."
+    },
+    "info": {
+      "loading": "Loading character card...",
+      "loadingFailed": "Character loading failed",
+      "title": "Information",
+      "fields": {
+        "gender": "Gender",
+        "status": "Status",
+        "species": "Specie",
+        "origin": "Origin",
+        "type": "Type",
+        "location": "Location"
+      }
+    }
+  },
+  "filters": {
+    "placeholder": {
+      "name": "Filter by name...",
+      "species": "Species",
+      "gender": "Gender",
+      "status": "Status"
+    },
+    "options": {
+      "all": "All",
+      "alive": "Alive",
+      "dead": "Dead",
+      "unknown": "Unknown",
+      "human": "Human",
+      "alien": "Alien",
+      "humanoid": "Humanoid",
+      "animal": "Animal",
+      "robot": "Robot",
+      "cronenberg": "Cronenberg",
+      "disease": "Disease",
+      "female": "Female",
+      "male": "Male",
+      "genderless": "Genderless"
+    }
+  },
+  "notFound": {
+    "imgAlt": "Page not found",
+    "goToMain": "Go to main page"
+  }
+}

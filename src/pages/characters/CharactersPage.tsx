@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { useCharacters } from '@/entities/character';
 import { logoXlImage } from '@/shared/assets';
 import { EmptyState, Loader, InfiniteScroll } from '@/shared/components';
@@ -10,6 +12,7 @@ import { CharactersList } from './components';
 import './CharactersPage.css';
 
 export const CharactersPage = () => {
+  const { t } = useTranslation();
   const filters = useCharactersFiltersStore((state) => state.filters);
 
   const {
@@ -46,13 +49,13 @@ export const CharactersPage = () => {
   if (isLoading) {
     content = (
       <div className='CharactersPage__loader'>
-        <Loader size='xl' text='Loading characters...' />
+        <Loader size='xl' text={t('characters.list.loading')} />
       </div>
     );
   }
 
   if (isEmpty) {
-    content = <EmptyState title='Characters list is empty...' />;
+    content = <EmptyState title={t('characters.list.empty')} />;
   }
 
   return (

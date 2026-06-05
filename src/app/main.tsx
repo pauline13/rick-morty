@@ -3,6 +3,8 @@ import { BrowserRouter } from 'react-router';
 
 import { AppProviders } from '@/app/providers';
 import { ErrorBoundary } from '@/shared/components/';
+import '@/stores/themeStore';
+import '@/shared/i18n/i18n';
 
 import App from './App.tsx';
 import '@/shared/styles/main.css';

@@ -1,4 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Button } from '../Button/Button';
 
@@ -21,6 +22,7 @@ export const InfiniteScroll = ({
   onRetry,
   loader
 }: InfiniteScrollProps) => {
+  const { t } = useTranslation();
   const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   const onLoadMoreRef = useRef(onLoadMore);
@@ -61,9 +63,11 @@ export const InfiniteScroll = ({
     if (hasError && onRetry) {
       return (
         <div className='InfiniteScroll__error'>
-          <p className='InfiniteScroll__errorText'>Loading failed</p>
+          <p className='InfiniteScroll__errorText'>
+            {t('common.loadingFailed')}
+          </p>
           <Button
-            text='Retry'
+            text={t('common.retry')}
             onClick={onRetry}
             className='InfiniteScroll__retryButton'
           />
