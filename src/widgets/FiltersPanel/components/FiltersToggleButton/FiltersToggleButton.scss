@@ -1,0 +1,36 @@
+@use '@/shared/styles/breakpoints' as *;
+
+.FiltersToggleButton {
+  display: none;
+
+  @include mobile {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    padding: 16px;
+    background-color: var(--background-button);
+    border: 1px solid var(--border-grey);
+    border-radius: var(--border-radius);
+  }
+}
+
+.FiltersToggleButton__icon {
+  position: absolute;
+  left: 16px;
+  color: var(--text-secondary);
+  transition: transform 0.2s ease;
+}
+
+.FiltersToggleButton__icon_expanded {
+  transform: rotate(180deg);
+}
+
+.FiltersToggleButton__label {
+  font-size: var(--font-size-l);
+  color: var(--text-secondary);
+  align-self: center;
+  text-transform: uppercase;
+}

@@ -6,7 +6,7 @@ import { Button, ButtonBack, Loader } from '@/shared/components';
 
 import { CharacterFields } from './components';
 
-import './CharacterInfoPage.css';
+import './CharacterInfoPage.scss';
 
 export const CharacterInfoPage = () => {
   const { t } = useTranslation();

@@ -1,7 +1,7 @@
 import type { Character } from '@/entities/character';
 import { CharacterCard } from '@/widgets';
 
-import './CharactersList.css';
+import './CharactersList.scss';
 
 type CharactersListProps = {
   characters: Character[];

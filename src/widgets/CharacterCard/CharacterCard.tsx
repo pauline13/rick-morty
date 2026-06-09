@@ -6,7 +6,7 @@ import { ButtonIcon } from '@/shared/components';
 import { classNames } from '@/shared/helpers';
 import { CharacterForm } from '@/widgets';
 
-import './CharacterCard.css';
+import './CharacterCard.scss';
 
 interface CharacterCardProps {
   character: Character;

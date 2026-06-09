@@ -1,0 +1,38 @@
+@use '@/shared/styles/breakpoints' as *;
+
+.FiltersPanelView {
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+
+  @include tablet {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
+}
+
+.FiltersPanelView__field {
+  width: 100%;
+  max-width: 238px;
+
+  @include tablet {
+    max-width: none;
+  }
+}
+
+.FiltersPanelView__field_select {
+  @include mobile {
+    display: none;
+  }
+}
+
+.FiltersPanelView_expanded .FiltersPanelView__field_select {
+  @include mobile {
+    display: block;
+  }
+}

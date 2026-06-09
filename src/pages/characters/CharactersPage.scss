@@ -1,12 +1,23 @@
+@use '@/shared/styles/breakpoints' as *;
+
 .CharactersPage {
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 1044px;
+  margin: 0 auto;
 }
 
 .CharactersPage__logo {
   display: flex;
   justify-content: center;
+}
+
+.CharactersPage__logo img {
+  display: block;
+  width: 600px;
+  max-width: 100%;
+  height: auto;
 }
 
 .CharactersPage__loader {
@@ -18,10 +29,6 @@
 
 .CharactersPage__filters {
   margin: 16px 0 26px;
-}
-
-.CharactersPage__content {
-  width: 100%;
 }
 
 .CharactersPage__content_empty {

@@ -9,7 +9,7 @@ import { FiltersPanel } from '@/widgets';
 
 import { CharactersList } from './components';
 
-import './CharactersPage.css';
+import './CharactersPage.scss';
 
 export const CharactersPage = () => {
   const { t } = useTranslation();
@@ -68,7 +68,7 @@ export const CharactersPage = () => {
       </aside>
 
       <section
-        className={classNames('CharactersPage__content', {
+        className={classNames({
           CharactersPage__content_empty: isEmpty
         })}
       >
