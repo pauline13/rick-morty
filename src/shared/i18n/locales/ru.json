@@ -48,6 +48,8 @@
     }
   },
   "filters": {
+    "moreFilters": "Больше фильтров",
+    "lessFilters": "Скрыть фильтры",
     "placeholder": {
       "name": "Поиск по имени...",
       "species": "Вид",

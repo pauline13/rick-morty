@@ -48,6 +48,8 @@
     }
   },
   "filters": {
+    "moreFilters": "More filters",
+    "lessFilters": "Less filters",
     "placeholder": {
       "name": "Filter by name...",
       "species": "Species",

@@ -1,0 +1,13 @@
+@use '@/shared/styles/breakpoints' as *;
+
+.CharactersList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 508px));
+  justify-content: space-between;
+  gap: 1.75rem;
+  list-style: none;
+
+  @include tablet {
+    grid-template-columns: 1fr;
+  }
+}

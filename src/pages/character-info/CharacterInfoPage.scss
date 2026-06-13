@@ -1,7 +1,15 @@
+@use '@/shared/styles/breakpoints' as *;
+
 .CharacterInfoPage {
   display: grid;
   grid-template-columns: 20% 60% 20%;
-  justify-content: space-between;
+  width: 100%;
+  max-width: 1044px;
+  margin: 0 auto;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+  }
 }
 
 .CharacterInfoPage__loader {
@@ -19,6 +27,7 @@
 }
 
 .CharacterInfoPage__errorText {
+  color: var(--text-secondary);
   font-size: var(--font-size-l);
 }
 
@@ -31,6 +40,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-self: center;
+  width: 100%;
+  max-width: 420px;
+
+  @include mobile {
+    max-width: none;
+    width: 100%;
+  }
 }
 
 .CharacterInfoPage__img {
@@ -38,12 +55,23 @@
   height: 300px;
   border-radius: 50%;
   border: 5px solid var(--border-light-grey);
+
+  @include mobile {
+    width: clamp(146px, 45vw, 300px);
+    height: auto;
+  }
 }
 
 .CharacterInfoPage__name {
   color: var(--text-primary);
   font-size: var(--font-size-header-xl);
   margin: 16px 0 42px;
+  width: 100%;
+  text-align: center;
+
+  @include mobile {
+    font-size: var(--font-size-header-l);
+  }
 }
 
 .CharacterInfoPage__infoTitle {

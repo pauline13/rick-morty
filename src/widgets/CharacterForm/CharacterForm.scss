@@ -1,7 +1,15 @@
+@use '@/shared/styles/breakpoints' as *;
+
 .CharacterForm {
   display: flex;
   flex-direction: column;
   gap: 10px;
+
+  @include mobile {
+    flex-flow: row wrap;
+    width: 100%;
+    min-width: 0;
+  }
 }
 
 .CharacterForm__nameWrapper {
@@ -9,7 +17,11 @@
   align-items: center;
   height: 30px;
   font-weight: 500;
-  max-width: 178px;
+
+  @include mobile {
+    flex: 0 0 100%;
+    padding-right: 50px;
+  }
 }
 
 .CharacterForm__inputName {
@@ -22,7 +34,7 @@
   font-size: var(--font-size-xxl);
   color: var(--text-primary);
   text-decoration: none;
-  max-width: 178px;
+  max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -30,6 +42,15 @@
 
 .CharacterForm__linkName:hover {
   color: var(--text-secondary);
+}
+
+.CharacterForm__field {
+  min-width: 0;
+
+  @include mobile {
+    flex: 1 1 0;
+    padding-right: 10px;
+  }
 }
 
 .CharacterForm__label {
@@ -41,4 +62,7 @@
   margin-top: 7px;
   font-size: var(--font-size-m);
   color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

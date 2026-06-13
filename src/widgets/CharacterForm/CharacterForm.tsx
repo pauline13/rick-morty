@@ -6,7 +6,7 @@ import type { Character } from '@/entities/character';
 import { Input, Select, StatusDot, type Option } from '@/shared/components';
 import { STATUS_OPTIONS } from '@/shared/constants';
 
-import './CharacterForm.css';
+import './CharacterForm.scss';
 
 interface CharacterFormProps {
   value: Character;
@@ -52,15 +52,21 @@ export const CharacterForm = ({
         )}
       </div>
       <div className='CharacterForm__field'>
-        <p className='CharacterForm__label'>{t('characters.info.fields.gender')}</p>
+        <p className='CharacterForm__label'>
+          {t('characters.info.fields.gender')}
+        </p>
         <p className='CharacterForm__value'>{translateValue(value.gender)}</p>
       </div>
       <div className='CharacterForm__field'>
-        <p className='CharacterForm__label'>{t('characters.info.fields.species')}</p>
+        <p className='CharacterForm__label'>
+          {t('characters.info.fields.species')}
+        </p>
         <p className='CharacterForm__value'>{translateValue(value.species)}</p>
       </div>
       <div className='CharacterForm__field'>
-        <p className='CharacterForm__label'>{t('characters.info.fields.location')}</p>
+        <p className='CharacterForm__label'>
+          {t('characters.info.fields.location')}
+        </p>
         <Input
           placeholder={t('characters.info.fields.location')}
           value={value.location.name}
@@ -79,7 +85,9 @@ export const CharacterForm = ({
         />
       </div>
       <div className='CharacterForm__field'>
-        <p className='CharacterForm__label'>{t('characters.info.fields.status')}</p>
+        <p className='CharacterForm__label'>
+          {t('characters.info.fields.status')}
+        </p>
         <Select
           options={STATUS_OPTIONS.map(translateOption)}
           value={value.status}

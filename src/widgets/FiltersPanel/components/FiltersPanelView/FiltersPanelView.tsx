@@ -1,5 +1,5 @@
 import type { ParseKeys } from 'i18next';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import type { CharactersFilters } from '@/entities/character';
@@ -11,7 +11,11 @@ import {
   SPECIES_OPTIONS,
   GENDER_OPTIONS
 } from '@/shared/constants';
-import { toFilterValue, withAllOption } from '@/shared/helpers';
+import { classNames, toFilterValue, withAllOption } from '@/shared/helpers';
+
+import { FiltersToggleButton } from '../FiltersToggleButton';
+
+import './FiltersPanelView.scss';
 
 export interface FiltersPanelViewProps {
   value: CharactersFilters;
@@ -29,6 +33,7 @@ const GENDER_FILTER_OPTIONS = withAllOption(GENDER_OPTIONS, ALL_FILTER_OPTION);
 export const FiltersPanelView = memo(
   ({ value, onChange, disabled }: FiltersPanelViewProps) => {
     const { t } = useTranslation();
+    const [isFiltersExpanded, setIsFiltersExpanded] = useState(false);
 
     const translateOptions = <T extends string>(options: Option<T>[]) =>
       options.map((o) => ({
@@ -37,9 +42,13 @@ export const FiltersPanelView = memo(
       }));
 
     return (
-      <section className='FiltersPanel'>
+      <section
+        className={classNames('FiltersPanelView', {
+          FiltersPanelView_expanded: isFiltersExpanded
+        })}
+      >
         <Input
-          classNameWrapper='FiltersPanel__field'
+          classNameWrapper='FiltersPanelView__field'
           placeholder={t('filters.placeholder.name')}
           value={value.name}
           onChange={(name) => onChange({ ...value, name })}
@@ -49,7 +58,7 @@ export const FiltersPanelView = memo(
           testId='filter-name-input'
         />
         <Select
-          className='FiltersPanel__field'
+          className='FiltersPanelView__field FiltersPanelView__field_select'
           value={value.species}
           options={translateOptions(SPECIES_FILTER_OPTIONS)}
           placeholder={t('filters.placeholder.species')}
@@ -62,7 +71,7 @@ export const FiltersPanelView = memo(
           disabled={disabled}
         />
         <Select
-          className='FiltersPanel__field'
+          className='FiltersPanelView__field FiltersPanelView__field_select'
           value={value.gender}
           options={translateOptions(GENDER_FILTER_OPTIONS)}
           placeholder={t('filters.placeholder.gender')}
@@ -75,7 +84,7 @@ export const FiltersPanelView = memo(
           disabled={disabled}
         />
         <Select
-          className='FiltersPanel__field'
+          className='FiltersPanelView__field FiltersPanelView__field_select'
           value={value.status}
           options={translateOptions(STATUS_FILTER_OPTIONS)}
           placeholder={t('filters.placeholder.status')}
@@ -86,6 +95,10 @@ export const FiltersPanelView = memo(
             })
           }
           disabled={disabled}
+        />
+        <FiltersToggleButton
+          isExpanded={isFiltersExpanded}
+          onClick={() => setIsFiltersExpanded((prev) => !prev)}
         />
       </section>
     );

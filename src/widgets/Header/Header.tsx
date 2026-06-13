@@ -5,7 +5,7 @@ import { LogoIcon } from '@/shared/assets';
 import { LanguageSwitcher } from '../LanguageSwitcher/LanguageSwitcher';
 import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher';
 
-import './Header.css';
+import './Header.scss';
 
 export const Header = () => {
   return (

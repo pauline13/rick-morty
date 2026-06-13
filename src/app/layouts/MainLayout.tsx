@@ -2,7 +2,7 @@ import { Toaster } from 'react-hot-toast';
 import { Outlet } from 'react-router';
 
 import { Footer, Header } from '@/widgets';
-import './MainLayout.css';
+import './MainLayout.scss';
 
 export const MainLayout = () => {
   return (

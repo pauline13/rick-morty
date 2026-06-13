@@ -2,9 +2,7 @@ import { memo } from 'react';
 
 import { useCharactersFiltersStore } from '@/stores';
 
-import { FiltersPanelView } from './FiltersPanelView';
-
-import './FiltersPanel.css';
+import { FiltersPanelView } from './components';
 
 interface FiltersPanelProps {
   disabled?: boolean;

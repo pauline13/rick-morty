@@ -1,17 +1,16 @@
+@use '@/shared/styles/breakpoints' as *;
+
 .MainLayout {
-  min-height: 100vh;
-  height: 100%;
-  flex-direction: column;
   display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
   background-color: var(--background-body);
 }
 
 .MainLayout__content {
   flex: 1;
-  width: 100%;
-  padding: 1.5rem 0;
-  align-self: center;
-  max-width: 1040px;
+  padding: 1.5rem 1rem;
 }
 
 .MainLayout__header,
@@ -20,6 +19,6 @@
 }
 
 .MainLayout__toast {
-  background: var(--background-body) !important;
   color: var(--text-primary) !important;
+  background: var(--background-body) !important;
 }

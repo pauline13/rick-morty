@@ -1,7 +1,13 @@
+@use '@/shared/styles/breakpoints' as *;
+
 .Header {
   width: 100%;
   background-color: var(--background-default);
   box-shadow: 0 2px 6px -2px var(--shadow-light);
+
+  @include tablet {
+    padding: 0 1.5rem;
+  }
 }
 
 .Header__content {
