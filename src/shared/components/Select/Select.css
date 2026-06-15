@@ -31,7 +31,8 @@
 }
 
 .Select_sm {
-  height: 21px;
+  min-height: 21px;
+  height: auto;
   padding: 2px 5px;
   font-size: var(--font-size-m);
 }
@@ -40,7 +41,16 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  min-width: 0;
   color: var(--text-secondary);
+}
+
+.Select__valueLabel {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .Select__icon {
@@ -102,4 +112,12 @@
 
 .Select__option:hover {
   background: var(--background-default-hover);
+}
+
+.Select__optionLabel {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -89,6 +89,7 @@ export const CharacterForm = ({
           {t('characters.info.fields.status')}
         </p>
         <Select
+          className='CharacterForm__select'
           options={STATUS_OPTIONS.map(translateOption)}
           value={value.status}
           readOnly={!isEditing}
