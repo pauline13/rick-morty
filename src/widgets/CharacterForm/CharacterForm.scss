@@ -66,3 +66,11 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.CharacterForm__select {
+  width: max-content;
+
+  @include mobile {
+    width: 100%;
+  }
+}

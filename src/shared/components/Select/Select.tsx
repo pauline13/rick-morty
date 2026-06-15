@@ -75,11 +75,15 @@ export const Select = <T extends string>({
         <div className='Select__value'>
           {selectedOption ? (
             <>
-              <span>{selectedOption.label}</span>
-              {renderSuffix?.(selectedOption)}
+              <span className='Select__valueLabel'>{selectedOption.label}</span>
+              {renderSuffix?.(selectedOption) && (
+                <span className='Select__valueSuffix'>
+                  {renderSuffix(selectedOption)}
+                </span>
+              )}
             </>
           ) : (
-            placeholder
+            <span className='Select__valueLabel'>{placeholder}</span>
           )}
         </div>
 
