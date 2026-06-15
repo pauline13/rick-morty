@@ -1,6 +1,6 @@
 import { loaderImage } from '@/shared/assets';
 import { classNames } from '@/shared/helpers';
-import './Loader.css';
+import './Loader.scss';
 
 interface LoaderProps {
   size?: 'xl' | 'sm';
