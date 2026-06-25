@@ -18,6 +18,8 @@
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest run --coverage",
+    "test:storybook": "playwright test -c playwright.storybook.config.ts",
+    "test:storybook:update": "playwright test -c playwright.storybook.config.ts -u",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui"
   },

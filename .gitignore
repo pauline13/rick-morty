@@ -27,6 +27,10 @@ dist-ssr
 # Test coverage
 coverage
 
+# Storybook
+*storybook.log
+storybook-static
+
 # Playwright reports
 playwright-report
 test-results
