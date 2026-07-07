@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 
 import { ArrowDownIcon } from '@/shared/assets';
 import { classNames } from '@/shared/helpers';
+import { useClickOutside } from '@/shared/hooks';
 import './Select.css';
 
 export interface Option<T extends string = string> {
@@ -35,16 +36,7 @@ export const Select = <T extends string>({
   const [isOpen, setIsOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (!rootRef.current?.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  useClickOutside(rootRef, () => setIsOpen(false));
 
   const selectedOption = options.find((option) => option.value === value);
 

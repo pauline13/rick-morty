@@ -1,5 +1,6 @@
 import path from 'path';
 
+import federation from '@originjs/vite-plugin-federation';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { analyzer } from 'vite-bundle-analyzer';
@@ -11,12 +12,22 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig(({ mode }) => {
   const isAnalyze = mode === 'analyze';
   const base = process.env.VITE_BASE_PATH || '/';
+  const remoteAppUrl =
+    process.env.VITE_REMOTE_APP_URL ||
+    'http://localhost:5001/assets/remoteEntry.js';
 
   return {
     base,
     plugins: [
       react(),
       svgr(),
+      federation({
+        name: 'host_app',
+        remotes: {
+          remote_app: remoteAppUrl
+        },
+        shared: ['react', 'react-dom']
+      }),
       ViteImageOptimizer(),
       VitePWA({
         base,
@@ -125,6 +136,13 @@ export default defineConfig(({ mode }) => {
       }),
       ...(isAnalyze ? [analyzer({ analyzerPort: 8889 })] : [])
     ],
+
+    build: {
+      modulePreload: false,
+      target: 'esnext',
+      minify: false,
+      cssCodeSplit: false
+    },
 
     resolve: {
       alias: {

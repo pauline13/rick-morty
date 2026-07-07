@@ -20,6 +20,7 @@
 
   @include mobile {
     flex: 0 0 100%;
+    gap: 6px;
     padding-right: 50px;
   }
 }
@@ -31,12 +32,12 @@
 
 .CharacterForm__linkName {
   height: 23px;
+  max-width: 100%;
+  overflow: hidden;
   font-size: var(--font-size-xxl);
   color: var(--text-primary);
   text-decoration: none;
-  max-width: 100%;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 

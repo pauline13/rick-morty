@@ -28,6 +28,9 @@
       "madeBy": "Made with love by pauliedev"
     }
   },
+  "favorites": {
+    "empty": "No favorite characters"
+  },
   "characters": {
     "list": {
       "loading": "Loading characters...",

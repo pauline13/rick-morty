@@ -46,6 +46,38 @@
   }
 }
 
+.CharacterCard__favorite {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  color: var(--status-green);
+  transition: opacity 0.2s;
+  opacity: 0;
+  pointer-events: none;
+
+  @include mobile {
+    position: static;
+    flex-shrink: 0;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.CharacterCard:hover .CharacterCard__favorite {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.CharacterCard__favorite_active {
+  color: var(--status-green);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.CharacterCard__favorite_active .CharacterCard__starIcon path:first-child {
+  opacity: 1;
+}
+
 .CharacterCard__actions {
   position: absolute;
   top: 8px;
