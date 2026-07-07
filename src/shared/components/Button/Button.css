@@ -14,6 +14,10 @@
   font-family: inherit;
 }
 
+.Button_disabled {
+  cursor: not-allowed;
+}
+
 .Button:hover {
   opacity: 0.8;
   background-color: var(--background-default-hover);

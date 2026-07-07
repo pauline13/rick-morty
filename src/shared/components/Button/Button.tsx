@@ -7,6 +7,7 @@ interface ButtonProps {
   onClick?: () => void;
   className?: string;
   textClassName?: string;
+  disabled?: boolean;
 }
 
 export const Button = ({
@@ -14,10 +15,15 @@ export const Button = ({
   icon,
   onClick,
   className,
-  textClassName
+  textClassName,
+  disabled
 }: ButtonProps) => {
   return (
-    <button className={classNames('Button', className)} onClick={onClick}>
+    <button
+      className={classNames('Button', className, disabled && 'Button_disabled')}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {icon && <span className='Button__icon'>{icon}</span>}
       {text && (
         <span className={classNames('Button__text', textClassName)}>
