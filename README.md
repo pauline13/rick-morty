@@ -57,10 +57,10 @@ src/
 
 Приложение работает как **host app** и подключает удалённый модуль `remote_app/FavoriteCharacters` через Module Federation.
 
-В `vite.config.ts` remote настраивается переменной окружения:
+В `vite.config.ts` URL микрофронта избранного настраивается переменной окружения:
 
 ```bash
-VITE_REMOTE_APP_URL=http://localhost:5001/assets/remoteEntry.js
+VITE_REMOTE_FAVORITES_URL=http://localhost:5001/assets/remoteEntry.js
 ```
 
 Если переменная не задана, используется значение по умолчанию `http://localhost:5001/assets/remoteEntry.js`. Для локальной разработки нужно, чтобы remote-приложение с компонентом избранных персонажей было запущено и отдавало `remoteEntry.js`.

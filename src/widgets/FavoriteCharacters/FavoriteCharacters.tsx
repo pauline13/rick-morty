@@ -2,7 +2,6 @@ import { lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 
-import type { FavoriteCharactersProps } from '@/remotes/favoriteCharacters/types';
 import { StarIcon } from '@/shared/assets';
 import { Button } from '@/shared/components';
 import { useFavoriteCharactersStore } from '@/stores';
@@ -30,15 +29,9 @@ export const FavoriteCharacters = () => {
     <Suspense fallback={<Button icon={<StarIcon />} disabled />}>
       <RemoteFavoriteCharacters
         emptyText={t('favorites.empty')}
-        favoriteCharacters={
-          favoriteCharacters satisfies FavoriteCharactersProps['favoriteCharacters']
-        }
-        onCharacterClick={
-          handleCharacterClick satisfies FavoriteCharactersProps['onCharacterClick']
-        }
-        onRemoveFavorite={
-          removeFavorite satisfies FavoriteCharactersProps['onRemoveFavorite']
-        }
+        favoriteCharacters={favoriteCharacters}
+        onCharacterClick={handleCharacterClick}
+        onRemoveFavorite={removeFavorite}
       />
     </Suspense>
   );

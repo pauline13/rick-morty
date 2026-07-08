@@ -3,10 +3,7 @@ import { persist } from 'zustand/middleware';
 
 import type { Character } from '@/entities/character';
 
-export interface FavoriteCharacter {
-  id: Character['id'];
-  name: Character['name'];
-}
+export type FavoriteCharacter = Pick<Character, 'id' | 'name'>;
 
 interface FavoriteCharactersState {
   favoriteCharacters: FavoriteCharacter[];

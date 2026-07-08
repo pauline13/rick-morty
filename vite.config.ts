@@ -8,13 +8,14 @@ import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import { VitePWA } from 'vite-plugin-pwa';
 import svgr from 'vite-plugin-svgr';
 
+import { DEFAULT_REMOTE_FAVORITES_URL } from './federation.config';
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const isAnalyze = mode === 'analyze';
   const base = process.env.VITE_BASE_PATH || '/';
-  const remoteAppUrl =
-    process.env.VITE_REMOTE_APP_URL ||
-    'http://localhost:5001/assets/remoteEntry.js';
+  const remoteFavoritesUrl =
+    process.env.VITE_REMOTE_FAVORITES_URL ?? DEFAULT_REMOTE_FAVORITES_URL;
 
   return {
     base,
@@ -24,7 +25,7 @@ export default defineConfig(({ mode }) => {
       federation({
         name: 'host_app',
         remotes: {
-          remote_app: remoteAppUrl
+          remote_app: remoteFavoritesUrl
         },
         shared: ['react', 'react-dom']
       }),
