@@ -57,13 +57,9 @@ src/
 
 Приложение работает как **host app** и подключает удалённый модуль `remote_app/FavoriteCharacters` через Module Federation.
 
-В `vite.config.ts` URL микрофронта избранного настраивается переменной окружения:
+Микрофронт избранного деплоится отдельно (на Vercel) и отдаёт `remoteEntry.js`. Host загружает его по URL из `VITE_REMOTE_FAVORITES_URL`.
 
-```bash
-VITE_REMOTE_FAVORITES_URL=http://localhost:5001/assets/remoteEntry.js
-```
-
-Если переменная не задана, используется значение по умолчанию `http://localhost:5001/assets/remoteEntry.js`. Для локальной разработки нужно, чтобы remote-приложение с компонентом избранных персонажей было запущено и отдавало `remoteEntry.js`.
+**Локальная разработка:** если переменная не задана, используется dev-дефолт из `federation.config.ts` — `http://localhost:5001/assets/remoteEntry.js`. Нужно, чтобы remote-приложение было запущено локально.
 
 Host передаёт в remote список избранных персонажей, обработчик удаления, обработчик перехода на детальную страницу и локализованный текст пустого состояния.
 
