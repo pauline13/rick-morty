@@ -15,7 +15,7 @@ export default defineConfig(({ mode }) => {
   const isAnalyze = mode === 'analyze';
   const base = process.env.VITE_BASE_PATH || '/';
   const remoteFavoritesUrl =
-    process.env.VITE_REMOTE_FAVORITES_URL ?? DEFAULT_REMOTE_FAVORITES_URL;
+    process.env.VITE_REMOTE_FAVORITES_URL || DEFAULT_REMOTE_FAVORITES_URL;
 
   return {
     base,
