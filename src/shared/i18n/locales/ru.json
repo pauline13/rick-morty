@@ -28,6 +28,9 @@
       "madeBy": "Сделано с любовью от pauliedev"
     }
   },
+  "favorites": {
+    "empty": "Нет избранных персонажей"
+  },
   "characters": {
     "list": {
       "loading": "Загрузка персонажей...",

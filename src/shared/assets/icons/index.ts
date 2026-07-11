@@ -6,6 +6,7 @@ import EditIcon from './edit.svg?react';
 import LogoIcon from './logo.svg?react';
 import MoonIcon from './moon.svg?react';
 import SearchIcon from './search.svg?react';
+import StarIcon from './star.svg?react';
 import SunIcon from './sun.svg?react';
 
 export {
@@ -15,6 +16,7 @@ export {
   ArrowDownIcon,
   CloseIcon,
   SearchIcon,
+  StarIcon,
   EditIcon,
   CheckIcon,
   MoonIcon

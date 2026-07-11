@@ -1,4 +1,5 @@
 import type { ParseKeys } from 'i18next';
+import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 
@@ -12,12 +13,14 @@ interface CharacterFormProps {
   value: Character;
   onChange: (value: Character) => void;
   isEditing: boolean;
+  nameAction?: ReactNode;
 }
 
 export const CharacterForm = ({
   value,
   onChange,
-  isEditing
+  isEditing,
+  nameAction
 }: CharacterFormProps) => {
   const { t } = useTranslation();
 
@@ -50,6 +53,7 @@ export const CharacterForm = ({
             {value.name}
           </Link>
         )}
+        {!isEditing && nameAction}
       </div>
       <div className='CharacterForm__field'>
         <p className='CharacterForm__label'>

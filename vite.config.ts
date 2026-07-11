@@ -1,5 +1,6 @@
 import path from 'path';
 
+import federation from '@originjs/vite-plugin-federation';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { analyzer } from 'vite-bundle-analyzer';
@@ -7,16 +8,27 @@ import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import { VitePWA } from 'vite-plugin-pwa';
 import svgr from 'vite-plugin-svgr';
 
+import { DEFAULT_REMOTE_FAVORITES_URL } from './federation.config';
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const isAnalyze = mode === 'analyze';
   const base = process.env.VITE_BASE_PATH || '/';
+  const remoteFavoritesUrl =
+    process.env.VITE_REMOTE_FAVORITES_URL || DEFAULT_REMOTE_FAVORITES_URL;
 
   return {
     base,
     plugins: [
       react(),
       svgr(),
+      federation({
+        name: 'host_app',
+        remotes: {
+          remote_app: remoteFavoritesUrl
+        },
+        shared: ['react', 'react-dom']
+      }),
       ViteImageOptimizer(),
       VitePWA({
         base,
@@ -125,6 +137,13 @@ export default defineConfig(({ mode }) => {
       }),
       ...(isAnalyze ? [analyzer({ analyzerPort: 8889 })] : [])
     ],
+
+    build: {
+      modulePreload: false,
+      target: 'esnext',
+      minify: false,
+      cssCodeSplit: false
+    },
 
     resolve: {
       alias: {

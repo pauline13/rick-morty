@@ -2,6 +2,7 @@ import { Link } from 'react-router';
 
 import { LogoIcon } from '@/shared/assets';
 
+import { FavoriteCharacters } from '../FavoriteCharacters/FavoriteCharacters';
 import { LanguageSwitcher } from '../LanguageSwitcher/LanguageSwitcher';
 import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher';
 
@@ -15,6 +16,7 @@ export const Header = () => {
           <LogoIcon />
         </Link>
         <div className='Header__actions'>
+          <FavoriteCharacters />
           <ThemeSwitcher />
           <LanguageSwitcher />
         </div>
