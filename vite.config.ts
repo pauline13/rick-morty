@@ -138,6 +138,12 @@ export default defineConfig(({ mode }) => {
       ...(isAnalyze ? [analyzer({ analyzerPort: 8889 })] : [])
     ],
 
+    server: {
+      watch: {
+        usePolling: true
+      }
+    },
+
     build: {
       modulePreload: false,
       target: 'esnext',
