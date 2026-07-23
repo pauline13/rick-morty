@@ -30,6 +30,7 @@
 - **Vitest** + **Testing Library** + **jsdom** — unit- и component-тесты
 - **Playwright** — e2e-тесты в браузере
 - **ESLint** + **Stylelint** + **Prettier** — линтинг и форматирование
+- **Docker Compose** + **Make** — локальный запуск host и микрофронтенда в контейнерах
 - **vite-plugin-svgr** + **vite-plugin-image-optimizer** — оптимизация ассетов
 - **vite-plugin-pwa** + **Workbox** — PWA: манифест, service worker, кэширование
 - **vite-bundle-analyzer** — анализ бандла
@@ -67,9 +68,50 @@ Host передаёт в remote список избранных персонаж
 
 ## 📦 Установка
 
+Для обычного локального запуска установите зависимости и запустите dev-сервер:
+
 ```bash
-npm install         # установка зависимостей
+npm install
+npm run dev
 ```
+
+---
+
+## 🐳 Запуск в Docker
+
+Docker Compose запускает два сервиса:
+
+- `host` — основное приложение на http://localhost:5173;
+- `favorites` — микрофронтенд избранных персонажей на http://localhost:5001.
+
+Репозитории host и микрофронтенда должны находиться рядом:
+
+```text
+<project-directory>/
+├── rick-morty/
+└── rick-morty-favorites-mf/
+```
+
+Для запуска необходимы **Docker с Docker Compose** и, при использовании команд из `Makefile`, **Make**.
+
+```bash
+make docker-build-dev   # собрать dev-образы
+make docker-up-dev      # запустить оба приложения
+make docker-stop-dev    # остановить контейнеры без удаления
+make docker-start-dev   # повторно запустить существующие контейнеры
+make docker-down        # остановить и удалить контейнеры проекта
+```
+
+Без Make те же операции можно выполнять напрямую:
+
+```bash
+docker compose --profile dev build
+docker compose --profile dev up host
+docker compose --profile dev stop
+docker compose --profile dev down
+```
+
+Исходный код подключается в контейнеры через bind mounts, а зависимости хранятся в отдельных Docker volumes. Для стабильного hot reload host-приложение использует polling в настройках Vite.
 
 ---
 
