@@ -109,6 +109,9 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          VITE_BASE_PATH: /rick-morty/
+          VITE_REMOTE_FAVORITES_URL: ${{ secrets.VITE_REMOTE_FAVORITES_URL }}
 
   check:
     runs-on: ubuntu-latest
