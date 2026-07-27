@@ -30,7 +30,7 @@ jobs:
         run: npm run lint:styles
 
       - name: Test
-        run: exit 1
+        run: npm run test
 
       - name: Build
         run: npm run build
