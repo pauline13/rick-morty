@@ -11,7 +11,9 @@ export default defineConfig({
   snapshotPathTemplate: '{testDir}/{testFileDir}/{arg}{ext}',
   expect: {
     toHaveScreenshot: {
-      animations: 'disabled'
+      animations: 'disabled',
+      // Linux CI renders fonts/antialiasing slightly differently than Windows baselines
+      maxDiffPixelRatio: process.env.CI ? 0.05 : 0
     }
   },
   use: {
