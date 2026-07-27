@@ -6,10 +6,10 @@
   height: 38px;
   padding: 0 8px;
   font-size: var(--font-size-m);
+  color: var(--text-secondary);
   border: 1px solid var(--border-black);
   border-radius: var(--border-radius-m);
   background-color: var(--background-button);
-  color: var(--text-secondary);
   cursor: pointer;
   font-family: inherit;
 }
