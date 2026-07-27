@@ -12,12 +12,65 @@
 | **Vercel**       | https://rick-morty-liart-six.vercel.app/ |
 | **GitHub Pages** | https://pauline13.github.io/rick-morty/  |
 
+Выкладка на **GitHub Pages** идёт через GitHub Actions (см. ниже). **Vercel** подключён отдельно и не управляется этими workflow.
+
+---
+
+## 🔄 CI/CD (GitHub Actions)
+
+Пайплайн разделён на два workflow:
+
+| Файл | Роль |
+| ---- | ---- |
+| [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | **CI** — проверки качества кода |
+| [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) | **CD** — сборка и деплой на GitHub Pages |
+
+### Continuous Integration (`ci.yml`)
+
+Запускается на **pull request** в `master` и на **push** в `master`.
+
+Проверки идут **параллельно** отдельными job’ами; финальный job `check` ждёт всех и служит required status check (merge в `master` блокируется, пока `check` не зелёный):
+
+```text
+lint-and-styles ─┐
+unit ────────────┤
+build ───────────┼──► check
+e2e ─────────────┤
+storybook ───────┘
+```
+
+| Job | Что делает |
+| --- | ---------- |
+| `lint-and-styles` | ESLint + Stylelint |
+| `unit` | Vitest (unit / component) |
+| `build` | production-сборка с теми же Vite env, что у Pages (`VITE_BASE_PATH`, `VITE_REMOTE_FAVORITES_URL`) |
+| `e2e` | Playwright e2e (Chromium); поднимает Vite через `webServer` |
+| `storybook` | Playwright-скриншоты сторис; поднимает Storybook через `webServer` |
+| `check` | Агрегатор: успех только если все предыдущие job’ы зелёные |
+
+Окружение CI: **Node.js 24**, `actions/checkout@v5`, `actions/setup-node@v5`, установка зависимостей через `npm ci`.
+
+Для e2e и Storybook в CI дополнительно выполняется `npx playwright install --with-deps chromium`. В скриншот-тестах Storybook на Linux допустим небольшой pixel diff (`maxDiffPixelRatio` в `playwright.storybook.config.ts`), потому что эталоны сняты локально на Windows.
+
+### Continuous Deployment (`deploy.yml`)
+
+Деплой **не** стартует от `push` напрямую. Он подписан на успешное завершение workflow **CI** (`workflow_run`):
+
+1. Push / merge в `master` → запускается **CI**.
+2. CI зелёный и событие было `push` → стартует **Deploy to GitHub Pages**.
+3. Deploy checkout’ит тот же коммит (`head_sha` из CI), собирает с Pages env, копирует `404.html` для SPA и публикует артефакт.
+
+Также доступен ручной запуск: **Actions → Deploy to GitHub Pages → Run workflow** (`workflow_dispatch`).
+
+Секрет репозитория: `VITE_REMOTE_FAVORITES_URL` — URL `remoteEntry.js` микрофронтенда избранного (используется в CI `build` / `e2e` и в Deploy).
+
 ---
 
 ## 🛠️ Стек
 
 - **React 19** + **TypeScript**
 - **Vite 7** — сборка и dev-сервер
+- **GitHub Actions** — CI (lint, unit, e2e, Storybook, build) и CD на GitHub Pages
 - **React Router 7** — клиентская маршрутизация
 - **TanStack React Query 5** — серверное состояние, кэш, пагинация и запросы к API
 - **Zustand** — клиентское состояние (фильтры списка, тема оформления, избранные персонажи)
