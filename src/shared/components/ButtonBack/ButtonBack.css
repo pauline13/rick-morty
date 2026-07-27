@@ -2,11 +2,11 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  color: var(--text-primary);
   background: none;
   border: none;
   outline: none;
   cursor: pointer;
-  color: var(--text-primary);
 }
 
 .ButtonBack:hover {
